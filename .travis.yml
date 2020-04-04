@@ -1,0 +1,24 @@
+language: node_js
+
+node_js:
+   - "9"
+
+sudo: required
+
+services:
+  - docker
+  
+before_script:
+   - npm install -g @angular/cli
+   
+script:
+- npm install && ng build
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker build -t justplaybo/shic:$TRAVIS_BUILD_NUMBER -t justplaybo/shic:latest .
+- docker push justplaybo/shic
+
+notifications:
+  slack:
+    rooms:
+      - ingmmo:SW0ahzRuwFIJKKAlQPzGRg0f#prj-justplay
+      - ingmmo:SW0ahzRuwFIJKKAlQPzGRg0f#travisbuilds
