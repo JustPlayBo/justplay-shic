@@ -1,0 +1,29 @@
+.title{
+  font-family: 'Cinzel', Georgia, 'Times New Roman', Times, serif;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-container{
+  width: 100vw;
+  height: calc(100vh - 64px);
+}
+.sidebar {
+  width: 300px;
+}
+
+.sidebar-wide {
+  width: 500px;
+}
+
+#map{
+  width: 100vw;
+  height: calc(100vh - 64px);
+  
+}
