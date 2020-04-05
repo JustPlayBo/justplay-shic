@@ -10,11 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import { GameInfoComponent } from './game-info/game-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImageDialogComponent
+    ImageDialogComponent,
+    GameInfoComponent
   ],
   imports: [
     BrowserModule,

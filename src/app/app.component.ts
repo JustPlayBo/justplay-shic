@@ -1,3 +1,4 @@
+import { GameInfoComponent } from './game-info/game-info.component';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -56,6 +57,10 @@ export class AppComponent implements OnInit {
 
   show(title, url, width)  { 
     this.dialog.open(ImageDialogComponent, {data: {title, url, width}});
+  }
+
+  gameInfo() {
+    this.dialog.open(GameInfoComponent);
   }
 
 }
