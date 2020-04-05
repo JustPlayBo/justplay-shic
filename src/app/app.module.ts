@@ -9,24 +9,35 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { BdgComponent } from './bdg/bdg.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BdgMapComponent } from './bdg-map/bdg-map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageDialogComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    BdgComponent,
+    BdgMapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

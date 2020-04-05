@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content>
+    <mat-tab-group>
+      <mat-tab *ngFor="let floor of data.floors" label="{{floor.name}}">
+        <ng-template matTabContent>
+            <bdg-map [floor]="floor" [bdg]="data.id" [fmt]="data.format"></bdg-map>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">OK</button>
+</div>
+
+

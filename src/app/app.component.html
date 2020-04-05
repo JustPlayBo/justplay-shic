@@ -18,10 +18,29 @@
 
 <mat-drawer-container class="example-container">
   <mat-drawer class="sidebar-wide" #lbar mode="over" opened>
-    <img *ngFor="let time of times" src="{{time.url}}" width="240" (click)="show('The Times', time.url, 900)">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let timed of times" [expanded]="timed.open">
+        <mat-expansion-panel-header>
+          {{timed.title}}
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <img *ngFor="let time of timed.pages" src="{{time.url}}" width="215" (click)="show('The Times', time.url, 900)">
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-drawer>
+
   <mat-drawer class="sidebar" #rbar position="end" mode="over" opened>
-    <img *ngFor="let ann of annuario" src="{{ann.url}}" width="280" (click)="show('Annuario', ann.url, 800)">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let annu of annuario" [expanded]="annu.open">
+        <mat-expansion-panel-header>
+          {{annu.title}}
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <img *ngFor="let ann of annu.pages" src="{{ann.url}}" width="240" (click)="show('Annuario', ann.url, 800)">
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
     <div id="map">MAP</div>
