@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       attribution: 'Map of London, Copyright Asmodee'
     }).addTo(this.mymap);
     L.tileLayer('/assets/ddt/qp/{z}/{x}/{y}.png', {
-      minZoom: 15,
+      minZoom: 12,
       maxZoom: 18,
       tms: false,
       attribution: 'Map of Queen\'s Park, Copyright Asmodee'
