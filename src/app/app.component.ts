@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
       this.times[1].pages.push({ type: 'img', url: '/assets/ddt/times/chqp/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
     }
 
-    this.times.push({ title: 'Delitti del Tamigi - Vecchia Edizione', pages: [], open: true });
+    this.times.push({ title: 'Delitti del Tamigi - Vecchia Edizione', pages: [], open: false });
     for (let i = 1; i < 21; i++) {
       this.times[0].pages.push({ type: 'img', url: '/assets/ddt/times/ddt-old/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
     }
