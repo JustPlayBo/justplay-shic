@@ -91,6 +91,11 @@ export class AppComponent implements OnInit {
       this.times[2].pages.push({ type: 'img', url: '/assets/ddt/times/ddt-old/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
     }
 
+    this.times.push({ title: 'Casi Aggiuntivi - Scrittore Senza Nome', pages: [], open: false });
+    for (let i = 2; i < 4; i++) {
+      this.times[3].pages.push({ type: 'img', url: '/assets/ddt/times/ssn/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
+    }
+
   }
 
   show(title, url, width)  { 
