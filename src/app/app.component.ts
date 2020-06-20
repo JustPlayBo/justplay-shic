@@ -52,6 +52,12 @@ export class AppComponent implements OnInit {
       tms: false,
       attribution: 'Map of Queen\'s Park, Copyright Asmodee'
     }).addTo(this.mymap);
+    L.tileLayer('/assets/ddt/bo/{z}/{x}/{y}.png', {
+      minZoom: 12,
+      maxZoom: 19,
+      tms: false,
+      attribution: 'Map of Bologna, Copyright Archivio Digitale Comune di Bologna'
+    }).addTo(this.mymap);
     this.interactions = L.geoJSON([], {
       onEachFeature: (f, l) =>{
         l.on({
