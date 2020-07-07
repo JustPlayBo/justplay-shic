@@ -1,0 +1,19 @@
+<div mat-dialog-title>
+    <h1>{{data.id}}<span *ngIf="data.name"> - {{data.name}}</span></h1>
+</div>
+<div mat-dialog-content>
+    <div *ngIf="data.itwiki || data.wiki">Wikipedia:
+        <a *ngIf="data.itwiki" target="_blank" href="{{data.itwiki}}">IT</a> 
+        <a *ngIf="data.wiki" target="_blank" href="{{data.wiki}}">EN</a>
+    </div>
+    <mat-expansion-panel *ngIf="adventure.adventureSelected">
+      <mat-expansion-panel-header>
+        Visualizza l'indizio
+      </mat-expansion-panel-header>
+      <div [innerHtml]="getHint()"></div>
+      
+    </mat-expansion-panel>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">OK</button>
+</div>

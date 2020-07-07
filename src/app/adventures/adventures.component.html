@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Scegli Avventura</h1>
+<div mat-dialog-content *ngIf="adventures">
+  <mat-list *ngIf="adventures.length > 0">
+      <mat-list-item *ngFor="let i of adventures"><button mat-button (click)="startAdventure(i)">{{i.name}} by {{i.author}}</button></mat-list-item>
+  </mat-list>
+
+  <div *ngIf="adventures.length === 0">
+      Non ci sono avventure da giocare
+  </div>
+</div>
+<div mat-dialog-actions>
+</div>

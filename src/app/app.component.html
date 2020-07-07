@@ -7,6 +7,11 @@
     <span class="example-spacer"></span>
     <span class="title">Sherlock Holmes - Consulente Investigativo</span>
     <button mat-icon-button (click)="gameInfo()"><mat-icon>info</mat-icon></button>
+
+
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      Avventure
+    </button>
     <span class="example-spacer"></span>
     <button mat-button (click)="rbar.toggle()">
       <span>Annuario</span>
@@ -46,4 +51,11 @@
     <div id="map">MAP</div>
   </mat-drawer-content>
 </mat-drawer-container>
+
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item (click)="chooseAdventure()">Scegli Avventura</button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Rileggi introduzione</button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
+  <a href="https://advenutes.sherlock.justplaybo.it" target="_blank" mat-menu-item>Crea Avventura...</a>
+</mat-menu>
 

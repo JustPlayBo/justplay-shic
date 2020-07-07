@@ -10,13 +10,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { BdgComponent } from './bdg/bdg.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BdgMapComponent } from './bdg-map/bdg-map.component';
+import { HintComponent } from './hint/hint.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { AdventuresComponent } from './adventures/adventures.component';
+import { SolutionComponent } from './solution/solution.component';
+import { MatListModule } from '@angular/material/list';
+import { IntroComponent } from './intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,11 @@ import { BdgMapComponent } from './bdg-map/bdg-map.component';
     ImageDialogComponent,
     GameInfoComponent,
     BdgComponent,
-    BdgMapComponent
+    BdgMapComponent,
+    HintComponent,
+    AdventuresComponent,
+    SolutionComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +44,12 @@ import { BdgMapComponent } from './bdg-map/bdg-map.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatListModule,
     MatSidenavModule,
     MatDialogModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,14 @@
+import { IntroComponent } from './intro/intro.component';
+import { SolutionComponent } from './solution/solution.component';
+import { AdventureService } from './adventure.service';
 import { BdgComponent } from './bdg/bdg.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { HintComponent } from './hint/hint.component';
+import { AdventuresComponent } from './adventures/adventures.component';
 
 declare const L;
 
@@ -22,10 +27,12 @@ export class AppComponent implements OnInit {
   annuario = [];
 
   interactions;
+  points;
 
   constructor(
     private dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    public adv: AdventureService
   ) {
     
   }
@@ -59,17 +66,42 @@ export class AppComponent implements OnInit {
       attribution: 'Map of Bologna, Copyright Archivio Digitale Comune di Bologna'
     }).addTo(this.mymap);
     this.interactions = L.geoJSON([], {
-      onEachFeature: (f, l) =>{
+      onEachFeature: (f, l) => {
         l.on({
-          click: (e) =>{
+          click: (e) => {
             console.log(f);
             this.dialog.open(BdgComponent, { data: f.properties });
           }
         })
       }
     }).addTo(this.mymap);
+    const geojsonMarkerOptions = {
+      radius: 30,
+      fillColor: "#ff7800",
+      color: "#000",
+      weight: 1,
+      opacity: 0.3,
+      fillOpacity: 0
+    };
+
+    this.points = L.geoJSON([], {
+      pointToLayer: (feature, latlng) => {
+        return L.circle(latlng, geojsonMarkerOptions);
+      },
+      onEachFeature: (f, l) => {
+        l.on({
+          click: (e) => {
+            console.log(f);
+            this.dialog.open(HintComponent, { data: f.properties });
+          }
+        })
+      }
+    }).addTo(this.mymap);
     this.http.get('/assets/ddt/interactions.geojson').subscribe((data: any) => {
       this.interactions.addData(data.features);
+    });
+    this.http.get('/assets/ddt/points.geojson').subscribe((data: any) => {
+      this.points.addData(data.features);
     });
 
 
@@ -110,6 +142,17 @@ export class AppComponent implements OnInit {
 
   gameInfo() {
     this.dialog.open(GameInfoComponent);
+  }
+
+  chooseAdventure() {
+    this.dialog.open(AdventuresComponent);
+  }
+
+  solveAdventure() {
+    this.dialog.open(IntroComponent);
+  }
+  solveAdventure() {
+    this.dialog.open(SolutionComponent);
   }
 
 }
