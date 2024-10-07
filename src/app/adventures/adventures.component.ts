@@ -19,4 +19,6 @@ export class AdventuresComponent implements OnInit {
       this.adventures = data;
     });
   }
+
+  startAdventure(i){}
 }
