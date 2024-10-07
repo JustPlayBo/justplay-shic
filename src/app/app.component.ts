@@ -151,8 +151,5 @@ export class AppComponent implements OnInit {
   solveAdventure() {
     this.dialog.open(IntroComponent);
   }
-  solveAdventure() {
-    this.dialog.open(SolutionComponent);
-  }
 
 }
