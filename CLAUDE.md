@@ -42,11 +42,11 @@ Dialog data for hints is resolved through `AdventureService.getHint(place)`, whi
 
 `AdventureService` (`providedIn: 'root'`) is the single source of truth for the selected adventure. It talks to an external API at `https://adventures.sherlock.justplaybo.it/` (not configurable via `src/environments/`), exposes `adventureSelected` to toggle menu items in `app.component.html`, and holds `adventure` for `getHint` / `solveAdventure`. Errors are swallowed via `catchError(() => of([]))` — if you need user-visible error handling, add it here.
 
-### Static content inventory (loops in `AppComponent`)
+### Static content inventory (`assets/ddt/manifest.json`)
 
-`times` and `annuario` arrays are hand-built in `ngOnInit` by counting through fixed filename patterns:
-`/assets/ddt/times/{ddt,chqp,ddt-old,ssn}/Times-page-NNN.jpg` and `/assets/ddt/annuario/{ddt,chqp}/Annuario-page-NNN.jpg`.
-Page counts are hard-coded loop bounds — when adding/removing scans you must update both the filesystem **and** the loop ranges in `app.component.ts`.
+The left-drawer `times` and right-drawer `annuario` lists are loaded at runtime from `src/assets/ddt/manifest.json`. Each section has `{title, open, pages: string[]}`, where `pages` holds absolute URLs. `AppComponent.ngOnInit` fetches the manifest via `HttpClient` and assigns directly to `this.times` / `this.annuario`.
+
+When adding/removing scans, regenerate the manifest from the filesystem — there is a short Node one-liner in the Angular 20 migration commit that walks `assets/ddt/{times,annuario}/*/` and emits the JSON. Thumbnails use `loading="lazy"` + `decoding="async"`, so a section only pays for the pages visible after the user expands it.
 
 ### Side drawers
 
