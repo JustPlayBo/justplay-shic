@@ -4,6 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-hint',
+  standalone: false,
   templateUrl: './hint.component.html',
   styleUrls: ['./hint.component.scss']
 })
