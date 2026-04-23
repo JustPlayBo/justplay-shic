@@ -29,7 +29,10 @@
           {{timed.title}}
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          <img *ngFor="let time of timed.pages" src="{{time.url}}" width="215" (click)="show('The Times', time.url, 900)">
+          <img *ngFor="let url of timed.pages"
+               [src]="url" width="215"
+               loading="lazy" decoding="async"
+               (click)="show('The Times', url, 900)">
         </ng-template>
       </mat-expansion-panel>
     </mat-accordion>
@@ -42,7 +45,10 @@
           {{annu.title}}
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          <img *ngFor="let ann of annu.pages" src="{{ann.url}}" width="240" (click)="show('Annuario', ann.url, 800)">
+          <img *ngFor="let url of annu.pages"
+               [src]="url" width="240"
+               loading="lazy" decoding="async"
+               (click)="show('Annuario', url, 800)">
         </ng-template>
       </mat-expansion-panel>
     </mat-accordion>

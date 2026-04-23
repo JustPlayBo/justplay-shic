@@ -1,0 +1,183 @@
+{
+  "times": [
+    {
+      "title": "Delitti del Tamigi",
+      "open": true,
+      "pages": [
+        "/assets/ddt/times/ddt/Times-page-001.jpg",
+        "/assets/ddt/times/ddt/Times-page-002.jpg",
+        "/assets/ddt/times/ddt/Times-page-003.jpg",
+        "/assets/ddt/times/ddt/Times-page-004.jpg",
+        "/assets/ddt/times/ddt/Times-page-005.jpg",
+        "/assets/ddt/times/ddt/Times-page-006.jpg",
+        "/assets/ddt/times/ddt/Times-page-007.jpg",
+        "/assets/ddt/times/ddt/Times-page-008.jpg",
+        "/assets/ddt/times/ddt/Times-page-009.jpg",
+        "/assets/ddt/times/ddt/Times-page-010.jpg",
+        "/assets/ddt/times/ddt/Times-page-011.jpg",
+        "/assets/ddt/times/ddt/Times-page-012.jpg",
+        "/assets/ddt/times/ddt/Times-page-013.jpg",
+        "/assets/ddt/times/ddt/Times-page-014.jpg",
+        "/assets/ddt/times/ddt/Times-page-015.jpg",
+        "/assets/ddt/times/ddt/Times-page-016.jpg",
+        "/assets/ddt/times/ddt/Times-page-017.jpg",
+        "/assets/ddt/times/ddt/Times-page-018.jpg",
+        "/assets/ddt/times/ddt/Times-page-019.jpg",
+        "/assets/ddt/times/ddt/Times-page-020.jpg"
+      ]
+    },
+    {
+      "title": "Carlton House e Queen's Park",
+      "open": false,
+      "pages": [
+        "/assets/ddt/times/chqp/Times-page-001.jpg",
+        "/assets/ddt/times/chqp/Times-page-002.jpg",
+        "/assets/ddt/times/chqp/Times-page-003.jpg",
+        "/assets/ddt/times/chqp/Times-page-004.jpg",
+        "/assets/ddt/times/chqp/Times-page-005.jpg",
+        "/assets/ddt/times/chqp/Times-page-006.jpg",
+        "/assets/ddt/times/chqp/Times-page-007.jpg",
+        "/assets/ddt/times/chqp/Times-page-008.jpg",
+        "/assets/ddt/times/chqp/Times-page-009.jpg",
+        "/assets/ddt/times/chqp/Times-page-010.jpg"
+      ]
+    },
+    {
+      "title": "Delitti del Tamigi - Vecchia Edizione",
+      "open": false,
+      "pages": [
+        "/assets/ddt/times/ddt-old/Times-page-001.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-002.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-003.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-004.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-005.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-006.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-007.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-008.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-009.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-010.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-011.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-012.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-013.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-014.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-015.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-016.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-017.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-018.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-019.jpg",
+        "/assets/ddt/times/ddt-old/Times-page-020.jpg"
+      ]
+    },
+    {
+      "title": "Casi Aggiuntivi - Scrittore Senza Nome",
+      "open": false,
+      "pages": [
+        "/assets/ddt/times/ssn/Times-page-002.jpg",
+        "/assets/ddt/times/ssn/Times-page-003.jpg"
+      ]
+    },
+    {
+      "title": "Baker Street Irregulars",
+      "open": false,
+      "pages": [
+        "/assets/ddt/times/bsi/Times_page-0001.jpg",
+        "/assets/ddt/times/bsi/Times_page-0002.jpg",
+        "/assets/ddt/times/bsi/Times_page-0003.jpg",
+        "/assets/ddt/times/bsi/Times_page-0004.jpg",
+        "/assets/ddt/times/bsi/Times_page-0005.jpg",
+        "/assets/ddt/times/bsi/Times_page-0006.jpg",
+        "/assets/ddt/times/bsi/Times_page-0007.jpg",
+        "/assets/ddt/times/bsi/Times_page-0008.jpg",
+        "/assets/ddt/times/bsi/Times_page-0009.jpg",
+        "/assets/ddt/times/bsi/Times_page-0010.jpg"
+      ]
+    }
+  ],
+  "annuario": [
+    {
+      "title": "Delitti del Tamigi",
+      "open": true,
+      "pages": [
+        "/assets/ddt/annuario/ddt/Annuario-page-001.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-002.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-003.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-004.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-005.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-006.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-007.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-008.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-009.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-010.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-011.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-012.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-013.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-014.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-015.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-016.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-017.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-018.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-019.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-020.jpg",
+        "/assets/ddt/annuario/ddt/Annuario-page-021.jpg"
+      ]
+    },
+    {
+      "title": "Carlton House e Queen's Park",
+      "open": false,
+      "pages": [
+        "/assets/ddt/annuario/chqp/Annuario-page-001.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-002.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-003.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-004.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-005.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-006.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-007.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-008.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-009.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-010.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-011.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-012.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-013.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-014.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-015.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-016.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-017.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-018.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-019.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-020.jpg",
+        "/assets/ddt/annuario/chqp/Annuario-page-021.jpg"
+      ]
+    },
+    {
+      "title": "Irregolari di Baker Street",
+      "open": false,
+      "pages": [
+        "/assets/ddt/annuario/bsi/Annuario_page-0001.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0002.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0003.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0004.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0005.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0006.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0007.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0008.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0009.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0010.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0011.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0012.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0013.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0014.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0015.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0016.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0017.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0018.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0019.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0020.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0021.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0022.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0023.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0024.jpg",
+        "/assets/ddt/annuario/bsi/Annuario_page-0025.jpg"
+      ]
+    }
+  ]
+}

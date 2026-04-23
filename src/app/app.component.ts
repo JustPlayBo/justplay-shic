@@ -12,6 +12,17 @@ import { AdventuresComponent } from './adventures/adventures.component';
 
 declare const L;
 
+interface PageSection {
+  title: string;
+  open: boolean;
+  pages: string[];
+}
+
+interface AssetManifest {
+  times: PageSection[];
+  annuario: PageSection[];
+}
+
 @Component({
   selector: 'app-root',
   standalone: false,
@@ -23,9 +34,9 @@ export class AppComponent implements OnInit {
 
   mymap;
 
-  times = [];
+  times: PageSection[] = [];
 
-  annuario = [];
+  annuario: PageSection[] = [];
 
   interactions;
   points;
@@ -105,36 +116,10 @@ export class AppComponent implements OnInit {
       this.points.addData(data.features);
     });
 
-
-    this.annuario.push({ title: 'Delitti del Tamigi', pages: [], open: true});
-    for (let i = 1; i < 22; i++) {
-      this.annuario[0].pages.push({ type: 'img', url: '/assets/ddt/annuario/ddt/Annuario-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-    this.annuario.push({ title: 'Carlton House e Queen\'s Park', pages: [], open: false});
-    for (let i = 1; i < 22; i++) {
-      this.annuario[1].pages.push({ type: 'img', url: '/assets/ddt/annuario/chqp/Annuario-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-
-    this.times.push({ title: 'Delitti del Tamigi', pages: [], open: true });
-    for (let i = 1; i < 21; i++) {
-      this.times[0].pages.push({ type: 'img', url: '/assets/ddt/times/ddt/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-
-    this.times.push({ title: 'Carlton House e Queen\'s Park', pages: [], open: false });
-    for (let i = 1; i < 11; i++) {
-      this.times[1].pages.push({ type: 'img', url: '/assets/ddt/times/chqp/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-
-    this.times.push({ title: 'Delitti del Tamigi - Vecchia Edizione', pages: [], open: false });
-    for (let i = 1; i < 21; i++) {
-      this.times[2].pages.push({ type: 'img', url: '/assets/ddt/times/ddt-old/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-
-    this.times.push({ title: 'Casi Aggiuntivi - Scrittore Senza Nome', pages: [], open: false });
-    for (let i = 2; i < 4; i++) {
-      this.times[3].pages.push({ type: 'img', url: '/assets/ddt/times/ssn/Times-page-' + i.toString().padStart(3, '0') + '.jpg' })
-    }
-
+    this.http.get<AssetManifest>('/assets/ddt/manifest.json').subscribe(manifest => {
+      this.times = manifest.times;
+      this.annuario = manifest.annuario;
+    });
   }
 
   show(title, url, width)  { 
