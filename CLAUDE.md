@@ -4,16 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Angular CLI 9 project. Standard scripts via npm:
+Angular CLI 19 project. Standard scripts via npm:
 
 - `npm start` / `ng serve` — dev server at http://localhost:4200
-- `ng build` — build to `dist/justplay-shic/` (add `--prod` for production)
+- `ng build` — build to `dist/justplay-shic/` (production config is the default; add `--configuration=development` for a fast dev build)
 - `ng test` — Karma + Jasmine unit tests (all `*.spec.ts`)
   - Single spec: `ng test --include='**/adventure.service.spec.ts'`
-- `ng lint` — TSLint (`tslint.json`, `codelyzer`)
-- `ng e2e` — Protractor end-to-end tests (`e2e/`)
 
-Node 12 toolchain (see `.travis.yml`). CI builds the app, then a Docker image `justplaybo/shic` (nginx:alpine serving `dist/justplay-shic`).
+Node 20 toolchain (see `.travis.yml`). Linting (TSLint) and e2e (Protractor) were removed during the Angular 9→19 migration; there is no `ng lint`/`ng e2e` target. CI builds the app, then a Docker image `justplaybo/shic` (nginx:alpine serving `dist/justplay-shic`).
 
 ## Architecture
 
@@ -23,6 +21,7 @@ This is a **companion web app** for the Italian board game *Sherlock Holmes — 
 
 - `app-routing.module.ts` defines **no routes** — `AppComponent` is the whole UI, and sub-features are opened as `MatDialog` instances (`GameInfoComponent`, `ImageDialogComponent`, `BdgComponent`, `HintComponent`, `AdventuresComponent`, `IntroComponent`, `SolutionComponent`). When adding a feature, prefer a dialog over a route unless real navigation is needed.
 - Netlify SPA fallback is `src/_redirects` (`/* /index.html 200`).
+- Every component has `standalone: false` — they are still declared in `AppModule`. Angular 19 defaults new components to standalone; if you add one intended for the module, you must set `standalone: false` explicitly.
 
 ### Leaflet is loaded globally, not as an npm dep
 
@@ -52,3 +51,7 @@ Page counts are hard-coded loop bounds — when adding/removing scans you must u
 ### Side drawers
 
 The left (`#lbar`) and right (`#rbar`) `mat-drawer`s render the Times and Annuario thumbnails; clicking a thumbnail opens `ImageDialogComponent` with `{title, url, width}`. Both drawers are `mode="over"` and `opened` by default.
+
+### Material theming
+
+`src/styles.scss` uses the Material 18+ M2 helpers (`mat.m2-define-palette`, `mat.$m2-brown-palette`, `mat.m2-define-dark-theme`, …) with `@use '@angular/material' as mat`. If/when you move to M3 (`mat.define-theme`), the custom brown/tan palette (`#644b13` primary, `#a19476` accent) needs to be redefined since M3 uses source-color generation rather than Material 2 palette maps.
