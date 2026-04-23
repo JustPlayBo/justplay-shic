@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adventures',
+  standalone: false,
   templateUrl: './adventures.component.html',
   styleUrls: ['./adventures.component.scss']
 })

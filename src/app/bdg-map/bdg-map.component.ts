@@ -4,6 +4,7 @@ declare const L;
 
 @Component({
   selector: 'bdg-map',
+  standalone: false,
   templateUrl: './bdg-map.component.html',
   styleUrls: ['./bdg-map.component.scss']
 })

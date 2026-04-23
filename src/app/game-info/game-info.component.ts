@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-game-info',
+  standalone: false,
   templateUrl: './game-info.component.html',
   styleUrls: ['./game-info.component.scss']
 })

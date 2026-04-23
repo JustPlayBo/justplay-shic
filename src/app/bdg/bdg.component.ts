@@ -5,6 +5,7 @@ declare const L;
 
 @Component({
   selector: 'app-bdg',
+  standalone: false,
   templateUrl: './bdg.component.html',
   styleUrls: ['./bdg.component.scss']
 })
