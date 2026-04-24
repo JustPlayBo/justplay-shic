@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AdventureService } from '../adventure.service';
 
 @Component({
   selector: 'app-solution',
@@ -6,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './solution.component.html',
   styleUrls: ['./solution.component.scss']
 })
-export class SolutionComponent implements OnInit {
+export class SolutionComponent {
+  constructor(public adventure: AdventureService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  get solution() {
+    return this.adventure.getSolution();
   }
-
 }

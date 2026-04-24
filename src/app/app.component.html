@@ -63,8 +63,16 @@
 
 <mat-menu #appMenu="matMenu">
   <button mat-menu-item (click)="chooseAdventure()">Scegli Avventura</button>
-  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Rileggi introduzione</button>
+  <button mat-menu-item (click)="adventureFileInput.click()">
+    <mat-icon>folder_open</mat-icon>
+    <span>Carica avventura (JSON)...</span>
+  </button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="showIntro()">Rileggi introduzione</button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="unloadAdventure()">
+    <mat-icon>close</mat-icon>
+    <span>Rimuovi avventura</span>
+  </button>
   <a href="https://adventures.sherlock.justplaybo.it" target="_blank" rel="noopener" mat-menu-item>Crea Avventura...</a>
   <mat-divider></mat-divider>
   <button mat-menu-item (click)="newSession()">
@@ -80,4 +88,7 @@
     <span>Termina partita</span>
   </button>
 </mat-menu>
+
+<input #adventureFileInput type="file" accept="application/json"
+       (change)="loadAdventureFromFile($event)" hidden>
 

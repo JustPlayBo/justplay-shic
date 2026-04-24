@@ -1,1 +1,10 @@
-<p>solution works!</p>
+<h2 mat-dialog-title>{{ solution?.title || 'Soluzione' }}</h2>
+<div mat-dialog-content class="narration">
+  <div *ngIf="solution; else noSolution" [innerHtml]="solution.html"></div>
+  <ng-template #noSolution>
+    <p class="empty">Nessuna soluzione disponibile.</p>
+  </ng-template>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Chiudi</button>
+</div>

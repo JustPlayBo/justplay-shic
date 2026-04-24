@@ -1,0 +1,49 @@
+{
+  "id": "sample-bsi",
+  "title": "L'Enigma della Piccola Lettera",
+  "version": 1,
+  "intro": {
+    "title": "L'Enigma della Piccola Lettera",
+    "html": "<p>Londra, un pomeriggio uggioso. Mentre Watson scorre il <em>Times</em> accanto al camino di Baker Street, un Baker Street Irregular batte alla porta.</p><p>«Signor Holmes, ci manda la signora Carruthers. Suo marito non è tornato a casa da due giorni e la biblioteca privata è stata messa a soqquadro.»</p><p>L'indagine comincia dal <strong>Criterion Club</strong>, ultimo luogo in cui è stato visto il signor Carruthers.</p><p><em>Suggerimento: ogni volta che la narrazione vi invita a «cerchiare una lettera», apritela nel taccuino — alcuni indizi successivi si sbloccheranno solo se avete raccolto la lettera giusta.</em></p>"
+  },
+  "solution": {
+    "title": "Soluzione",
+    "html": "<p>Il colpevole è il maggiordomo del Criterion Club, che aveva accesso al tesserino privato del signor Carruthers. Le lettere cerchiate S e W raccontano la storia: S per la <strong>Strongbox</strong> aperta, W per il <strong>Wellington</strong> ritrovato nell'Abbazia.</p>"
+  },
+  "places": {
+    "3SO": {
+      "default": "<p>Al Criterion Club il portiere ricorda il signor Carruthers: è entrato mercoledì pomeriggio e non è più uscito dall'ingresso principale.</p><p>Un tesserino privato giace sul pavimento — non era lì ieri.</p>",
+      "conditional": [
+        {
+          "requires": ["S"],
+          "html": "<p><strong>Con la lettera S</strong> — il tesserino apre uno strongbox nel seminterrato; all'interno, una mappa della zona di Westminster segnata a inchiostro rosso.</p>"
+        }
+      ]
+    },
+    "6SO": {
+      "default": "<p>St. James Palace è tranquillo. Le guardie non hanno notato nulla di strano nelle ultime 48 ore.</p>"
+    },
+    "8SO": {
+      "default": "<p>Al Diogene Club il silenzio è d'obbligo. Mycroft vi riceve con un cenno: «Mio fratello, se cerchi un uomo scomparso, prova a cerchiare la lettera <strong>W</strong>.»</p>",
+      "conditional": [
+        {
+          "requires": ["S", "W"],
+          "html": "<p><strong>Con S e W</strong> — Mycroft, senza alzare lo sguardo: «L'Abbazia di Westminster, padiglione Wellington. La vostra indagine finisce là.»</p>"
+        }
+      ]
+    },
+    "17SO": {
+      "default": "<p>L'Abbazia di Westminster accoglie poco più di qualche turista. Il custode indica la cappella di Sant'Eduardo.</p>",
+      "conditional": [
+        {
+          "requires": ["W"],
+          "html": "<p><strong>Con la lettera W</strong> — nel padiglione dedicato a Wellington trovate tracce recenti di un'effrazione e un brandello di tessuto blu scuro, lo stesso del cappotto del signor Carruthers.</p>"
+        },
+        {
+          "requires": ["S", "W"],
+          "html": "<p><strong>Con S e W</strong> — dietro la lapide di Wellington, un nascondiglio contiene un diario: il signor Carruthers vi è stato rinchiuso. Resta da capire chi lo ha condotto fin qui.</p>"
+        }
+      ]
+    }
+  }
+}

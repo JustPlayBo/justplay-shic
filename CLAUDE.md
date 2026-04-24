@@ -40,7 +40,39 @@ Dialog data for hints is resolved through `AdventureService.getHint(place)`, whi
 
 ### Adventure state (the only real service)
 
-`AdventureService` (`providedIn: 'root'`) is the single source of truth for the selected adventure. It talks to an external API at `https://adventures.sherlock.justplaybo.it/` (not configurable via `src/environments/`), exposes `adventureSelected` to toggle menu items in `app.component.html`, and holds `adventure` for `getHint` / `solveAdventure`. Errors are swallowed via `catchError(() => of([]))` — if you need user-visible error handling, add it here.
+`AdventureService` (`providedIn: 'root'`) is the single source of truth for the selected adventure. Two load paths feed it:
+
+1. **Remote** — `getAdventure(id)` hits `https://adventures.sherlock.justplaybo.it/adventures/{id}`.
+2. **Local file** — `loadAdventure(obj)` called by "Carica avventura..." in the menu, which `FileReader`-parses a JSON blob and calls it directly. The intro dialog auto-opens after a successful load.
+
+Both routes go through `loadAdventure` which validates that `places` is an object; anything else throws and the caller `alert()`s.
+
+**Adventure schema (v1)** — see `src/assets/ddt/adventures/sample-bsi.json` for a realistic example:
+
+```jsonc
+{
+  "id": "slug",
+  "title": "…",
+  "version": 1,
+  "intro":    { "title?": "…", "html": "…" },   // shown by IntroComponent
+  "solution": { "title?": "…", "html": "…" },   // shown by SolutionComponent
+  "places": {
+    "<pointId>": {
+      "default": "<p>always-visible clue at this point</p>",
+      "conditional": [
+        { "requires": ["S"],     "html": "<p>extra reveal if S is held</p>" },
+        { "requires": ["S","W"], "html": "<p>only with S and W</p>" }
+      ]
+    },
+    // or a bare string (legacy remote-API shape) is still accepted
+    "<pointId2>": "<p>plain clue</p>"
+  }
+}
+```
+
+**Hint evaluation** in `AdventureService.getHint(id)`: if the place entry is a string, return as-is. Otherwise concat `default` + every `conditional[].html` whose `requires` is a subset of `session.current.clues` (case-insensitive). The result is rendered via `[innerHtml]` in `HintComponent`, and because `getHint` reads the session's current snapshot, the hint re-evaluates automatically when the player adds/removes a clue while the dialog is open (no manual re-render needed).
+
+"Risolvi il caso" opens `SolutionComponent`; "Rileggi introduzione" opens `IntroComponent`. (Before the adventure refactor these both opened the intro — easy to confuse if you touch the menu.)
 
 ### Session tracking (localStorage-only)
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AdventureService } from '../adventure.service';
 
 @Component({
   selector: 'app-intro',
@@ -6,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './intro.component.html',
   styleUrls: ['./intro.component.scss']
 })
-export class IntroComponent implements OnInit {
+export class IntroComponent {
+  constructor(public adventure: AdventureService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  get intro() {
+    return this.adventure.getIntro();
   }
-
 }

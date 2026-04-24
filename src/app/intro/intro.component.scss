@@ -1,0 +1,14 @@
+.narration {
+    min-width: min(520px, 92vw);
+    max-height: 70vh;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+.narration :first-child {
+    margin-top: 0;
+}
+
+.empty {
+    opacity: 0.6;
+}

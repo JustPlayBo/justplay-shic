@@ -173,8 +173,36 @@ export class AppComponent implements OnInit {
     this.dialog.open(AdventuresComponent);
   }
 
-  solveAdventure() {
+  showIntro() {
     this.dialog.open(IntroComponent);
+  }
+
+  solveAdventure() {
+    this.dialog.open(SolutionComponent);
+  }
+
+  loadAdventureFromFile(evt: Event): void {
+    const input = evt.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result as string);
+        this.adv.loadAdventure(parsed);
+        this.showIntro();
+      } catch (err: any) {
+        alert('Caricamento avventura fallito: ' + (err?.message ?? 'file non valido.'));
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  unloadAdventure(): void {
+    if (confirm('Scaricare l\'avventura corrente?')) {
+      this.adv.unloadAdventure();
+    }
   }
 
   newSession() {
