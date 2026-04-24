@@ -1,4 +1,10 @@
-.title{
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.title {
   font-family: 'Cinzel', Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -10,20 +16,21 @@
   padding: 0 14px;
 }
 
-.example-container{
-  width: 100vw;
-  height: calc(100vh - 64px);
+.example-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
 }
+
 .sidebar {
-  width: 300px;
+  width: min(300px, 100vw);
 }
 
 .sidebar-wide {
-  width: 500px;
+  width: min(500px, 100vw);
 }
 
-#map{
-  width: 100vw;
-  height: calc(100vh - 64px);
-  
+#map {
+  width: 100%;
+  height: 100%;
 }
