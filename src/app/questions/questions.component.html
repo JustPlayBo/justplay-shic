@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Domande di fine caso</h2>
+<div mat-dialog-content class="questions">
+  <div *ngIf="!session.isActive()" class="warning">
+    <mat-icon>info</mat-icon>
+    Avvia una partita (Nuova partita) per registrare le tue risposte.
+  </div>
+
+  <div *ngIf="sets.length === 0" class="empty">
+    Questa avventura non contiene domande.
+  </div>
+
+  <section *ngFor="let set of sets">
+    <header class="set-header">
+      <h3>{{ set.title }}</h3>
+      <span class="score">
+        {{ setScore(set) }} / {{ setMax(set) }} pt
+      </span>
+    </header>
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let q of set.items" class="question"
+                           [class.correct]="isCorrect(q.id)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon *ngIf="isCorrect(q.id)" class="check">check_circle</mat-icon>
+            <span>{{ q.text }}</span>
+          </mat-panel-title>
+          <mat-panel-description>+{{ q.points }} pt</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="answer"><strong>Risposta:</strong> {{ q.answer }}</div>
+        <div class="rationale" *ngIf="q.rationale">{{ q.rationale }}</div>
+        <div class="controls" *ngIf="session.isActive()">
+          <mat-checkbox [checked]="isCorrect(q.id)"
+                        (change)="toggle(q.id, $event.checked)">
+            Risposta esatta
+          </mat-checkbox>
+          <button *ngIf="isAnswered(q.id)" mat-button (click)="clear(q.id)">
+            Annulla
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
+  <footer *ngIf="sets.length > 0" class="total">
+    Totale: <strong>{{ totalScore() }}</strong> / {{ totalMax() }} pt
+  </footer>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Chiudi</button>
+</div>

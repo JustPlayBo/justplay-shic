@@ -45,5 +45,88 @@
         }
       ]
     }
+  },
+  "questions": {
+    "primary": {
+      "title": "Domande principali",
+      "items": [
+        {
+          "id": "p1",
+          "text": "Chi è responsabile della scomparsa del signor Carruthers?",
+          "answer": "Il maggiordomo del Criterion Club.",
+          "points": 15
+        },
+        {
+          "id": "p2",
+          "text": "Dove è stato trattenuto il signor Carruthers?",
+          "answer": "Nel nascondiglio dietro la lapide di Wellington, all'Abbazia di Westminster.",
+          "points": 15
+        },
+        {
+          "id": "p3",
+          "text": "Quale oggetto rinvenuto al Criterion Club è stato decisivo per l'indagine?",
+          "answer": "Il tesserino privato caduto sul pavimento del Club.",
+          "points": 10,
+          "rationale": "Il tesserino apriva uno strongbox con la mappa della zona."
+        },
+        {
+          "id": "p4",
+          "text": "Cosa ha permesso a Mycroft di indicare Westminster?",
+          "answer": "La combinazione delle informazioni S (strongbox) e W (Wellington).",
+          "points": 10
+        }
+      ]
+    },
+    "secondary": {
+      "title": "Domande accessorie",
+      "items": [
+        {
+          "id": "s1",
+          "text": "Di che colore è il brandello di stoffa ritrovato all'Abbazia?",
+          "answer": "Blu scuro.",
+          "points": 5
+        },
+        {
+          "id": "s2",
+          "text": "In che giorno della settimana Carruthers è entrato al Criterion?",
+          "answer": "Mercoledì pomeriggio.",
+          "points": 5
+        },
+        {
+          "id": "s3",
+          "text": "Chi ha bussato alla porta di Baker Street all'inizio dell'indagine?",
+          "answer": "Un Baker Street Irregular, per conto della signora Carruthers.",
+          "points": 5
+        },
+        {
+          "id": "s4",
+          "text": "Quale cappella viene indicata inizialmente dal custode dell'Abbazia?",
+          "answer": "La cappella di Sant'Eduardo (depistaggio).",
+          "points": 5
+        }
+      ]
+    }
+  },
+  "sherlockPath": {
+    "title": "Percorso di Sherlock Holmes",
+    "steps": [
+      {
+        "at": "3SO",
+        "title": "Criterion Club",
+        "description": "Parla con il portiere, individua il tesserino sul pavimento e ispeziona lo strongbox nel seminterrato.",
+        "gains": ["S"]
+      },
+      {
+        "at": "8SO",
+        "title": "Diogene Club",
+        "description": "Mycroft conferma la connessione con Westminster; suggerisce di cerchiare la W.",
+        "gains": ["W"]
+      },
+      {
+        "at": "17SO",
+        "title": "Abbazia di Westminster",
+        "description": "Trova il nascondiglio dietro la lapide di Wellington e il diario di Carruthers."
+      }
+    ]
   }
 }

@@ -31,6 +31,8 @@ import { MatListModule } from '@angular/material/list';
 import { IntroComponent } from './intro/intro.component';
 import { SearchComponent } from './search/search.component';
 import { TaccuinoComponent } from './taccuino/taccuino.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { TaccuinoComponent } from './taccuino/taccuino.component';
     IntroComponent,
     SearchComponent,
     TaccuinoComponent,
+    QuestionsComponent,
+    SherlockPathComponent,
   ],
   imports: [
     BrowserModule,

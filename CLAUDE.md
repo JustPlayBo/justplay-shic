@@ -74,6 +74,27 @@ Both routes go through `loadAdventure` which validates that `places` is an objec
 
 "Risolvi il caso" opens `SolutionComponent`; "Rileggi introduzione" opens `IntroComponent`. (Before the adventure refactor these both opened the intro — easy to confuse if you touch the menu.)
 
+**Scoring + reference path extensions** (optional top-level fields):
+
+```jsonc
+{
+  "questions": {
+    "primary":   { "title": "…", "items": [{ "id": "p1", "text": "…", "answer": "…", "points": 15, "rationale": "…" }] },
+    "secondary": { "title": "…", "items": [ … ] }
+  },
+  "sherlockPath": {
+    "title": "…",
+    "steps": [
+      { "at": "3SO", "title": "…", "description": "…", "gains": ["S"] }
+    ]
+  }
+}
+```
+
+- Questions: each must have a stable `id` — scored answers are keyed on it (`session.answers[qid]`), so reordering the array without changing ids keeps progress intact. `QuestionsComponent` shows per-set + overall totals; checking "Risposta esatta" flips the entry, "Annulla" clears it. The checkbox is disabled when no session is active (nowhere to persist).
+- `sherlockPath.steps[].at` is optional — a step without a `pointId` still renders but has no fly-to button. `gains` feed the chip row so players can see which clue letters Holmes would have gathered at each step; the app does **not** automatically add them to the session — that would spoil self-scoring.
+- Menu items "Domande" / "Percorso di Holmes" are hidden unless the loaded adventure declares the matching section (`adv.hasQuestions` / `adv.hasSherlockPath`).
+
 ### Session tracking (localStorage-only)
 
 `SessionService` persists a single active "partita" under the localStorage key `shic.session`:

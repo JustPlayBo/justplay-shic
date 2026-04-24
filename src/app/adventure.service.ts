@@ -19,6 +19,31 @@ export interface PlaceHint {
   conditional?: ConditionalHint[];
 }
 
+export interface Question {
+  id: string;
+  text: string;
+  answer: string;
+  points: number;
+  rationale?: string;
+}
+
+export interface QuestionSet {
+  title: string;
+  items: Question[];
+}
+
+export interface PathStep {
+  at?: string;
+  title: string;
+  description?: string;
+  gains?: string[];
+}
+
+export interface SherlockPath {
+  title?: string;
+  steps: PathStep[];
+}
+
 export interface Adventure {
   id?: string;
   title?: string;
@@ -26,6 +51,11 @@ export interface Adventure {
   intro?: Narration;
   solution?: Narration | string;
   places: Record<string, string | PlaceHint>;
+  questions?: {
+    primary?: QuestionSet;
+    secondary?: QuestionSet;
+  };
+  sherlockPath?: SherlockPath;
 }
 
 const EMPTY_HINT = 'Non ci sono indizi in questo punto della mappa.';
@@ -87,6 +117,19 @@ export class AdventureService {
     const sol = this.adventure?.solution;
     if (!sol) return null;
     return typeof sol === 'string' ? { html: sol } : sol;
+  }
+
+  getQuestionSets(): QuestionSet[] {
+    const q = this.adventure?.questions;
+    if (!q) return [];
+    const sets: QuestionSet[] = [];
+    if (q.primary) sets.push(q.primary);
+    if (q.secondary) sets.push(q.secondary);
+    return sets;
+  }
+
+  getSherlockPath(): SherlockPath | null {
+    return this.adventure?.sherlockPath ?? null;
   }
 
   getHint(place: string): string {

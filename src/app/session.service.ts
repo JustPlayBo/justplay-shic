@@ -13,10 +13,16 @@ export interface ClueEntry {
   where?: string;
 }
 
+export interface AnswerEntry {
+  correct: boolean;
+  at: string;
+}
+
 export interface Session {
   startedAt: string;
   visited: Record<string, VisitedEntry>;
   clues: Record<string, ClueEntry>;
+  answers: Record<string, AnswerEntry>;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +39,7 @@ export class SessionService {
   }
 
   startNew(): void {
-    this.persist({ startedAt: new Date().toISOString(), visited: {}, clues: {} });
+    this.persist({ startedAt: new Date().toISOString(), visited: {}, clues: {}, answers: {} });
   }
 
   clear(): void {
@@ -98,6 +104,24 @@ export class SessionService {
     this.persist(s);
   }
 
+  getAnswer(qid: string): AnswerEntry | undefined {
+    return this.subject.value?.answers[qid];
+  }
+
+  setAnswer(qid: string, correct: boolean): void {
+    const s = this.subject.value;
+    if (!s) return;
+    s.answers[qid] = { correct, at: new Date().toISOString() };
+    this.persist(s);
+  }
+
+  clearAnswer(qid: string): void {
+    const s = this.subject.value;
+    if (!s?.answers[qid]) return;
+    delete s.answers[qid];
+    this.persist(s);
+  }
+
   exportJson(): string {
     return JSON.stringify(this.subject.value ?? null, null, 2);
   }
@@ -114,6 +138,7 @@ export class SessionService {
       startedAt: parsed.startedAt,
       visited: parsed.visited ?? {},
       clues: parsed.clues ?? {},
+      answers: parsed.answers ?? {},
     };
     this.persist(session);
   }
@@ -128,6 +153,7 @@ export class SessionService {
       startedAt: s.startedAt,
       visited: { ...s.visited },
       clues: { ...s.clues },
+      answers: { ...s.answers },
     });
   }
 
@@ -140,6 +166,7 @@ export class SessionService {
         startedAt: parsed.startedAt,
         visited: parsed.visited ?? {},
         clues: parsed.clues ?? {},
+        answers: parsed.answers ?? {},
       };
     } catch {
       return null;

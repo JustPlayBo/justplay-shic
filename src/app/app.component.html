@@ -69,6 +69,14 @@
   </button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="showIntro()">Rileggi introduzione</button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
+  <button *ngIf="adv.adventureSelected && hasQuestions" mat-menu-item (click)="openQuestions()">
+    <mat-icon>quiz</mat-icon>
+    <span>Domande</span>
+  </button>
+  <button *ngIf="adv.adventureSelected && hasSherlockPath" mat-menu-item (click)="openSherlockPath()">
+    <mat-icon>route</mat-icon>
+    <span>Percorso di Holmes</span>
+  </button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="unloadAdventure()">
     <mat-icon>close</mat-icon>
     <span>Rimuovi avventura</span>

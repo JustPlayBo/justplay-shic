@@ -11,6 +11,8 @@ import { HintComponent } from './hint/hint.component';
 import { AdventuresComponent } from './adventures/adventures.component';
 import { SearchComponent } from './search/search.component';
 import { TaccuinoComponent } from './taccuino/taccuino.component';
+import { QuestionsComponent } from './questions/questions.component';
+import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
 import { SessionService } from './session.service';
 import { MapService, MapPoint } from './map.service';
 
@@ -225,5 +227,21 @@ export class AppComponent implements OnInit {
 
   openTaccuino() {
     this.dialog.open(TaccuinoComponent);
+  }
+
+  openQuestions() {
+    this.dialog.open(QuestionsComponent);
+  }
+
+  openSherlockPath() {
+    this.dialog.open(SherlockPathComponent);
+  }
+
+  get hasQuestions() {
+    return this.adv.getQuestionSets().length > 0;
+  }
+
+  get hasSherlockPath() {
+    return !!this.adv.getSherlockPath();
   }
 }

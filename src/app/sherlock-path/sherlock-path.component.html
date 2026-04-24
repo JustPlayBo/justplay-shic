@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{ path?.title || 'Il percorso di Sherlock Holmes' }}</h2>
+<div mat-dialog-content class="path-dialog">
+  <p *ngIf="!path" class="empty">Questa avventura non include un percorso di riferimento.</p>
+
+  <ol *ngIf="path" class="steps">
+    <li *ngFor="let step of path.steps" class="step">
+      <div class="step-header">
+        <span class="step-title">{{ step.title }}</span>
+        <span *ngIf="step.at" class="step-code">{{ step.at }}</span>
+        <button *ngIf="pointFor(step)" mat-icon-button
+                aria-label="Vai al luogo" (click)="goTo(step)">
+          <mat-icon>place</mat-icon>
+        </button>
+      </div>
+      <p *ngIf="step.description" class="step-desc">{{ step.description }}</p>
+      <mat-chip-set *ngIf="step.gains?.length" class="step-gains">
+        <mat-chip *ngFor="let g of step.gains">{{ g }}</mat-chip>
+      </mat-chip-set>
+    </li>
+  </ol>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Chiudi</button>
+</div>
