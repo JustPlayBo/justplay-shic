@@ -1,24 +1,22 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-button (click)="lbar.toggle()">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">menu</mat-icon>
+    <button mat-button (click)="lbar.toggle()" aria-label="Apri pannello Times">
+      <mat-icon class="example-icon" aria-hidden="true">menu</mat-icon>
       <span>Times</span>
     </button>
     <span class="example-spacer"></span>
     <span class="title">Sherlock Holmes - Consulente Investigativo</span>
-    <button mat-icon-button (click)="gameInfo()"><mat-icon>info</mat-icon></button>
-
-
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
-      Avventure
+    <button mat-icon-button (click)="gameInfo()" aria-label="Informazioni sul gioco">
+      <mat-icon>info</mat-icon>
     </button>
+
+    <button mat-button [matMenuTriggerFor]="appMenu">Avventure</button>
     <span class="example-spacer"></span>
-    <button mat-button (click)="rbar.toggle()">
+    <button mat-button (click)="rbar.toggle()" aria-label="Apri pannello Annuario">
       <span>Annuario</span>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">menu</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="true">menu</mat-icon>
     </button>
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <mat-drawer-container class="example-container">
@@ -29,8 +27,9 @@
           {{timed.title}}
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          <img *ngFor="let url of timed.pages"
+          <img *ngFor="let url of timed.pages; let i = index"
                [src]="url" width="215"
+               [alt]="'Pagina ' + (i + 1) + ' — ' + timed.title"
                loading="lazy" decoding="async"
                (click)="show('The Times', url, 900)">
         </ng-template>
@@ -45,8 +44,9 @@
           {{annu.title}}
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          <img *ngFor="let url of annu.pages"
+          <img *ngFor="let url of annu.pages; let i = index"
                [src]="url" width="240"
+               [alt]="'Pagina ' + (i + 1) + ' — ' + annu.title"
                loading="lazy" decoding="async"
                (click)="show('Annuario', url, 800)">
         </ng-template>
@@ -54,7 +54,7 @@
     </mat-accordion>
   </mat-drawer>
   <mat-drawer-content>
-    <div id="map">MAP</div>
+    <div id="map"></div>
   </mat-drawer-content>
 </mat-drawer-container>
 
@@ -62,6 +62,6 @@
   <button mat-menu-item (click)="chooseAdventure()">Scegli Avventura</button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Rileggi introduzione</button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
-  <a href="https://advenutes.sherlock.justplaybo.it" target="_blank" mat-menu-item>Crea Avventura...</a>
+  <a href="https://adventures.sherlock.justplaybo.it" target="_blank" rel="noopener" mat-menu-item>Crea Avventura...</a>
 </mat-menu>
 

@@ -36,34 +36,8 @@ $app-alt-theme: mat.m2-define-light-theme((
   @include mat.all-component-colors($app-alt-theme);
 }
 
-@import 'https://fonts.googleapis.com/css?family=Material+Icons';
-@import url('https://fonts.googleapis.com/css?family=Cinzel:300,400,500');
-
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 body {
-  --primary-color: #644b13;
-  --primary-lighter-color: #d1c9b8;
-  --primary-darker-color: #48330b;
-  --accent-color: #a19476;
-  --accent-lighter-color: #e3dfd6;
-  --accent-darker-color: #857759;
-  --warn-color: #ff0000;
-  --warn-lighter-color: #ffb3b3;
-  --warn-darker-color: #ff0000;
-}
-
-.mat-raised-button,
-.mat-stroked-button,
-.mat-flat-button {
-  padding: 0 1.15em;
-  margin: 0 .65em;
-  min-width: 3em;
-  line-height: 36.4px;
-}
-
-.mat-standard-chip {
-  padding: .5em .85em;
-  min-height: 2.5em;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
