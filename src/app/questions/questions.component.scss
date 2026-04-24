@@ -46,6 +46,48 @@
     border-left: 3px solid #8bc34a;
 }
 
+.question ::ng-deep .mat-expansion-panel-header {
+    height: auto;
+    min-height: 48px;
+    padding: 10px 16px;
+}
+
+.question ::ng-deep .mat-expansion-panel-header-title {
+    margin-right: 8px;
+    flex-grow: 1;
+    white-space: normal;
+}
+
+.question ::ng-deep .mat-content {
+    overflow: visible;
+}
+
+.q-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+}
+
+.q-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    line-height: 1.35;
+}
+
+.q-points {
+    flex: 0 0 auto;
+    opacity: 0.75;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    align-self: center;
+    padding-left: 8px;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    margin-left: auto;
+}
+
 .answer {
     margin: 8px 0 4px;
 }

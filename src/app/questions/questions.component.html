@@ -19,12 +19,12 @@
     <mat-accordion multi>
       <mat-expansion-panel *ngFor="let q of set.items" class="question"
                            [class.correct]="isCorrect(q.id)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+        <mat-expansion-panel-header class="q-header">
+          <mat-panel-title class="q-title">
             <mat-icon *ngIf="isCorrect(q.id)" class="check">check_circle</mat-icon>
-            <span>{{ q.text }}</span>
+            <span class="q-text">{{ q.text }}</span>
+            <span class="q-points">+{{ q.points }} pt</span>
           </mat-panel-title>
-          <mat-panel-description>+{{ q.points }} pt</mat-panel-description>
         </mat-expansion-panel-header>
         <div class="answer"><strong>Risposta:</strong> {{ q.answer }}</div>
         <div class="rationale" *ngIf="q.rationale">{{ q.rationale }}</div>
