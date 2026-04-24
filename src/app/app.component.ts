@@ -9,6 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { HintComponent } from './hint/hint.component';
 import { AdventuresComponent } from './adventures/adventures.component';
+import { SearchComponent } from './search/search.component';
+import { SessionService } from './session.service';
+import { MapService, MapPoint } from './map.service';
 
 declare const L;
 
@@ -22,6 +25,24 @@ interface AssetManifest {
   times: PageSection[];
   annuario: PageSection[];
 }
+
+const VISITED_STYLE = {
+  radius: 30,
+  fillColor: '#a19476',
+  color: '#48330b',
+  weight: 2,
+  opacity: 0.9,
+  fillOpacity: 0.45,
+};
+
+const UNVISITED_STYLE = {
+  radius: 30,
+  fillColor: '#ff7800',
+  color: '#000',
+  weight: 1,
+  opacity: 0.3,
+  fillOpacity: 0,
+};
 
 @Component({
   selector: 'app-root',
@@ -44,9 +65,11 @@ export class AppComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private http: HttpClient,
-    public adv: AdventureService
+    public adv: AdventureService,
+    public session: SessionService,
+    private mapService: MapService,
   ) {
-    
+
   }
 
   ngOnInit() {
@@ -81,49 +104,64 @@ export class AppComponent implements OnInit {
       onEachFeature: (f, l) => {
         l.on({
           click: (e) => {
-            console.log(f);
             this.dialog.open(BdgComponent, { data: f.properties });
           }
         })
       }
     }).addTo(this.mymap);
-    const geojsonMarkerOptions = {
-      radius: 30,
-      fillColor: "#ff7800",
-      color: "#000",
-      weight: 1,
-      opacity: 0.3,
-      fillOpacity: 0
-    };
 
     this.points = L.geoJSON([], {
       pointToLayer: (feature, latlng) => {
-        return L.circle(latlng, geojsonMarkerOptions);
+        const visited = this.session.isVisited(feature.properties.id);
+        return L.circle(latlng, visited ? VISITED_STYLE : UNVISITED_STYLE);
       },
       onEachFeature: (f, l) => {
         l.on({
-          click: (e) => {
-            console.log(f);
-            this.dialog.open(HintComponent, { data: f.properties });
-          }
-        })
+          click: () => this.openHint(f.properties)
+        });
       }
     }).addTo(this.mymap);
+
     this.http.get('/assets/ddt/interactions.geojson').subscribe((data: any) => {
       this.interactions.addData(data.features);
     });
     this.http.get('/assets/ddt/points.geojson').subscribe((data: any) => {
       this.points.addData(data.features);
+      this.mapService.points = (data.features as any[]).map(f => ({
+        id: f.properties.id,
+        name: f.properties.name,
+        coordinates: f.geometry.coordinates,
+        properties: f.properties,
+      }) as MapPoint);
     });
 
     this.http.get<AssetManifest>('/assets/ddt/manifest.json').subscribe(manifest => {
       this.times = manifest.times;
       this.annuario = manifest.annuario;
     });
+
+    this.mapService.map = this.mymap;
+    this.mapService.openHint = (props) => this.openHint(props);
+
+    this.session.session$.subscribe(() => this.restylePoints());
   }
 
-  show(title, url, width)  { 
-    this.dialog.open(ImageDialogComponent, {data: {title, url, width}});
+  private restylePoints(): void {
+    if (!this.points) return;
+    this.points.eachLayer((layer: any) => {
+      const feature = layer.feature;
+      if (!feature) return;
+      const visited = this.session.isVisited(feature.properties.id);
+      layer.setStyle(visited ? VISITED_STYLE : UNVISITED_STYLE);
+    });
+  }
+
+  private openHint(properties: any): void {
+    this.dialog.open(HintComponent, { data: properties });
+  }
+
+  show(title, url, width) {
+    this.dialog.open(ImageDialogComponent, { data: { title, url, width } });
   }
 
   gameInfo() {
@@ -138,4 +176,21 @@ export class AppComponent implements OnInit {
     this.dialog.open(IntroComponent);
   }
 
+  newSession() {
+    if (this.session.isActive() &&
+        !confirm('Iniziare una nuova partita cancellerà i luoghi visitati e gli appunti. Continuare?')) {
+      return;
+    }
+    this.session.startNew();
+  }
+
+  endSession() {
+    if (confirm('Chiudere la partita corrente e rimuovere tutti gli appunti?')) {
+      this.session.clear();
+    }
+  }
+
+  openSearch() {
+    this.dialog.open(SearchComponent);
+  }
 }

@@ -1,0 +1,22 @@
+.search-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: min(420px, 90vw);
+}
+
+.filter-field {
+  width: 100%;
+}
+
+.results {
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.empty {
+  padding: 16px;
+  text-align: center;
+  opacity: 0.6;
+}

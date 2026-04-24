@@ -9,6 +9,9 @@
     <button mat-icon-button (click)="gameInfo()" aria-label="Informazioni sul gioco">
       <mat-icon>info</mat-icon>
     </button>
+    <button mat-icon-button (click)="openSearch()" aria-label="Cerca un luogo">
+      <mat-icon>search</mat-icon>
+    </button>
 
     <button mat-button [matMenuTriggerFor]="appMenu">Avventure</button>
     <span class="example-spacer"></span>
@@ -63,5 +66,14 @@
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Rileggi introduzione</button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
   <a href="https://adventures.sherlock.justplaybo.it" target="_blank" rel="noopener" mat-menu-item>Crea Avventura...</a>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="newSession()">
+    <mat-icon>play_arrow</mat-icon>
+    <span>{{ session.isActive() ? 'Ricomincia partita' : 'Nuova partita' }}</span>
+  </button>
+  <button mat-menu-item (click)="endSession()" *ngIf="session.isActive()">
+    <mat-icon>stop</mat-icon>
+    <span>Termina partita</span>
+  </button>
 </mat-menu>
 

@@ -3,17 +3,30 @@
 </div>
 <div mat-dialog-content>
     <div *ngIf="data.itwiki || data.wiki">Wikipedia:
-        <a *ngIf="data.itwiki" target="_blank" href="{{data.itwiki}}">IT</a> 
-        <a *ngIf="data.wiki" target="_blank" href="{{data.wiki}}">EN</a>
+        <a *ngIf="data.itwiki" target="_blank" rel="noopener" href="{{data.itwiki}}">IT</a>
+        <a *ngIf="data.wiki" target="_blank" rel="noopener" href="{{data.wiki}}">EN</a>
     </div>
     <mat-expansion-panel *ngIf="adventure.adventureSelected">
       <mat-expansion-panel-header>
         Visualizza l'indizio
       </mat-expansion-panel-header>
       <div [innerHtml]="getHint()"></div>
-      
     </mat-expansion-panel>
+
+    <div *ngIf="session.isActive()" class="tracker">
+      <mat-checkbox [checked]="visited" (change)="onVisitedChange($event.checked)">
+        Visitato
+      </mat-checkbox>
+      <mat-form-field appearance="outline" class="note-field">
+        <mat-label>Appunti</mat-label>
+        <textarea matInput rows="3"
+                  [disabled]="!visited"
+                  [ngModel]="note"
+                  (ngModelChange)="onNoteChange($event)"
+                  placeholder="Osservazioni, collegamenti, sospetti…"></textarea>
+      </mat-form-field>
+    </div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()">OK</button>
 </div>

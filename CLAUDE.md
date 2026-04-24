@@ -42,6 +42,16 @@ Dialog data for hints is resolved through `AdventureService.getHint(place)`, whi
 
 `AdventureService` (`providedIn: 'root'`) is the single source of truth for the selected adventure. It talks to an external API at `https://adventures.sherlock.justplaybo.it/` (not configurable via `src/environments/`), exposes `adventureSelected` to toggle menu items in `app.component.html`, and holds `adventure` for `getHint` / `solveAdventure`. Errors are swallowed via `catchError(() => of([]))` — if you need user-visible error handling, add it here.
 
+### Session tracking (localStorage-only)
+
+`SessionService` persists a single active "partita" under the localStorage key `shic.session`: `{startedAt, visited: Record<pointId, {at, note?}>}`. No backend. "Nuova partita" (app toolbar menu) calls `startNew()` which overwrites the previous session; there is no multi-session history. `SessionService.session$` is a `BehaviorSubject` — subscribing to it is how `AppComponent` re-styles the map circles when the player visits a new point or starts a new game.
+
+`HintComponent` auto-calls `session.markVisited(id)` on open **only if a session is active**; otherwise the hint dialog behaves exactly as before. Map circles switch between `VISITED_STYLE` (filled brown-accent) and `UNVISITED_STYLE` (hollow orange) in `app.component.ts` — change the constants there, not in `pointToLayer`, or the style will drift between the initial render and the restyle-on-visit path.
+
+### MapService bridge
+
+`MapService` is a tiny shared-state holder: the Leaflet map instance, a flat `MapPoint[]` derived from `points.geojson`, and an `openHint` callback. `AppComponent` populates it after loading; `SearchComponent` reads from it to `flyToAndOpen` a result. Other components should prefer this bridge over digging into `AppComponent` when they need to manipulate the map.
+
 ### Static content inventory (`assets/ddt/manifest.json`)
 
 The left-drawer `times` and right-drawer `annuario` lists are loaded at runtime from `src/assets/ddt/manifest.json`. Each section has `{title, open, pages: string[]}`, where `pages` holds absolute URLs. `AppComponent.ngOnInit` fetches the manifest via `HttpClient` and assigns directly to `this.times` / `this.annuario`.

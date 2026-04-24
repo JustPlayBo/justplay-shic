@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
@@ -23,6 +28,7 @@ import { AdventuresComponent } from './adventures/adventures.component';
 import { SolutionComponent } from './solution/solution.component';
 import { MatListModule } from '@angular/material/list';
 import { IntroComponent } from './intro/intro.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +40,15 @@ import { IntroComponent } from './intro/intro.component';
     HintComponent,
     AdventuresComponent,
     SolutionComponent,
-    IntroComponent
+    IntroComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -50,6 +58,10 @@ import { IntroComponent } from './intro/intro.component';
     MatTabsModule,
     MatExpansionModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

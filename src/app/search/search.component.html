@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Cerca luogo</h2>
+<div mat-dialog-content class="search-dialog">
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Nome o codice</mat-label>
+    <input matInput [(ngModel)]="filter" autofocus cdkFocusInitial>
+    <button *ngIf="filter" matSuffix mat-icon-button aria-label="Pulisci" (click)="filter = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-checkbox *ngIf="session.isActive()" [(ngModel)]="onlyVisited">
+    Solo visitati
+  </mat-checkbox>
+
+  <mat-action-list class="results">
+    <button mat-list-item *ngFor="let p of results()" (click)="select(p)">
+      <mat-icon matListItemIcon>
+        {{ session.isVisited(p.id) ? 'check_circle' : 'place' }}
+      </mat-icon>
+      <span matListItemTitle>{{ p.name || p.id }}</span>
+      <span matListItemLine *ngIf="p.name">{{ p.id }}</span>
+    </button>
+    <div *ngIf="results().length === 0" class="empty">Nessun risultato</div>
+  </mat-action-list>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Chiudi</button>
+</div>
