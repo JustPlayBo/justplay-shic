@@ -41,3 +41,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.fullscreen-dialog .mat-mdc-dialog-surface {
+  border-radius: 0;
+}
+
+.fullscreen-dialog .mat-mdc-dialog-container {
+  padding: 0;
+}
+
+.fullscreen-dialog mat-dialog-content.creator {
+  max-height: none;
+}

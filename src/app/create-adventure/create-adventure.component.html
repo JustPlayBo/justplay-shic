@@ -1,0 +1,264 @@
+<div class="header">
+  <h2>Crea avventura</h2>
+  <span class="spacer"></span>
+  <button mat-stroked-button (click)="loadCurrent()" *ngIf="adventure.adventureSelected"
+          matTooltip="Carica l'avventura attualmente selezionata">
+    <mat-icon>edit</mat-icon>
+    Modifica attuale
+  </button>
+  <button mat-stroked-button (click)="triggerImport()">
+    <mat-icon>upload</mat-icon>
+    Carica JSON
+  </button>
+  <input #fileInput type="file" accept="application/json"
+         (change)="onFileSelected($event)" hidden>
+  <button mat-stroked-button (click)="download()">
+    <mat-icon>download</mat-icon>
+    Scarica
+  </button>
+  <button mat-flat-button color="primary" (click)="apply()">
+    <mat-icon>play_arrow</mat-icon>
+    Usa come avventura
+  </button>
+  <button mat-icon-button mat-dialog-close aria-label="Chiudi">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div mat-dialog-content class="creator">
+  <mat-accordion multi>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Metadati</mat-panel-title>
+        <mat-panel-description>{{ draft.title || '— senza titolo —' }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="grid">
+        <mat-form-field appearance="outline">
+          <mat-label>ID (slug)</mat-label>
+          <input matInput [(ngModel)]="draft.id" placeholder="es. bsi-01">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Titolo</mat-label>
+          <input matInput [(ngModel)]="draft.title">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="narrow">
+          <mat-label>Versione</mat-label>
+          <input matInput type="number" min="1" [(ngModel)]="draft.version">
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Introduzione</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Titolo dialog</mat-label>
+        <input matInput [(ngModel)]="draft.intro.title">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>HTML</mat-label>
+        <textarea matInput rows="8" [(ngModel)]="draft.intro.html"
+                  placeholder="&lt;p&gt;Londra, 1889…&lt;/p&gt;"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Soluzione</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Titolo dialog</mat-label>
+        <input matInput [(ngModel)]="draft.solution.title">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>HTML</mat-label>
+        <textarea matInput rows="6" [(ngModel)]="draft.solution.html"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Luoghi</mat-panel-title>
+        <mat-panel-description>{{ draft.places.length }} configurati</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="add-row">
+        <mat-form-field appearance="outline" class="grow">
+          <mat-label>Aggiungi luogo</mat-label>
+          <mat-select [(ngModel)]="addPointId">
+            <mat-option *ngFor="let p of availablePoints" [value]="p.id">
+              {{ p.id }}<span *ngIf="p.name"> — {{ p.name }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-stroked-button (click)="addPlace()" [disabled]="!addPointId">
+          <mat-icon>add</mat-icon> Aggiungi
+        </button>
+      </div>
+
+      <div *ngFor="let place of draft.places; let i = index" class="place-editor">
+        <div class="place-head">
+          <strong>{{ placeLabel(place.id) }}</strong>
+          <button mat-icon-button aria-label="Rimuovi luogo" (click)="removePlace(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Indizio generale (HTML)</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="place.default"></textarea>
+        </mat-form-field>
+        <div class="conditional-list">
+          <div *ngFor="let cond of place.conditional; let ci = index" class="conditional">
+            <div class="conditional-head">
+              <span class="conditional-label">Se ha cerchiato:</span>
+              <mat-chip-set>
+                <mat-chip *ngFor="let letter of cond.requires"
+                          (removed)="removeRequires(cond, letter)">
+                  {{ letter }}
+                  <button matChipRemove aria-label="Rimuovi">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+              </mat-chip-set>
+              <mat-form-field appearance="outline" class="add-letter">
+                <mat-label>+ lettera</mat-label>
+                <input matInput maxlength="4" #letterInput
+                       (keydown.enter)="addRequires(cond, letterInput.value); letterInput.value=''">
+              </mat-form-field>
+              <button mat-icon-button aria-label="Rimuovi condizione"
+                      (click)="removeConditional(place, ci)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>HTML condizionale</mat-label>
+              <textarea matInput rows="3" [(ngModel)]="cond.html"></textarea>
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button (click)="addConditional(place)">
+            <mat-icon>add</mat-icon> Aggiungi ramo condizionale
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Domande principali</mat-panel-title>
+        <mat-panel-description>{{ draft.questions.primary.items.length }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-container *ngTemplateOutlet="questionSet; context: { $implicit: draft.questions.primary, prefix: 'p' }"></ng-container>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Domande accessorie</mat-panel-title>
+        <mat-panel-description>{{ draft.questions.secondary.items.length }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-container *ngTemplateOutlet="questionSet; context: { $implicit: draft.questions.secondary, prefix: 's' }"></ng-container>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Percorso di Holmes</mat-panel-title>
+        <mat-panel-description>{{ draft.sherlockPath.steps.length }} passi</mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="outline">
+        <mat-label>Titolo sezione</mat-label>
+        <input matInput [(ngModel)]="draft.sherlockPath.title">
+      </mat-form-field>
+      <div *ngFor="let step of draft.sherlockPath.steps; let i = index" class="step-editor">
+        <div class="step-head">
+          <strong>Passo {{ i + 1 }}</strong>
+          <button mat-icon-button aria-label="Rimuovi passo" (click)="removeStep(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="grid">
+          <mat-form-field appearance="outline" class="grow">
+            <mat-label>Titolo</mat-label>
+            <input matInput [(ngModel)]="step.title">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Luogo (opzionale)</mat-label>
+            <mat-select [(ngModel)]="step.at">
+              <mat-option [value]="undefined">— nessuno —</mat-option>
+              <mat-option *ngFor="let p of mapService.points" [value]="p.id">
+                {{ p.id }}<span *ngIf="p.name"> — {{ p.name }}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Descrizione</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="step.description"></textarea>
+        </mat-form-field>
+        <div class="gains">
+          <span class="gains-label">Indizi ottenuti:</span>
+          <mat-chip-set>
+            <mat-chip *ngFor="let g of step.gains" (removed)="removeStepGain(step, g)">
+              {{ g }}
+              <button matChipRemove aria-label="Rimuovi">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          </mat-chip-set>
+          <mat-form-field appearance="outline" class="add-letter">
+            <mat-label>+ lettera</mat-label>
+            <input matInput maxlength="4" #stepGainInput
+                   (keydown.enter)="addStepGain(step, stepGainInput.value); stepGainInput.value=''">
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-stroked-button (click)="addStep()">
+        <mat-icon>add</mat-icon> Aggiungi passo
+      </button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Anteprima JSON</mat-panel-title>
+      </mat-expansion-panel-header>
+      <pre class="json-preview">{{ toJson() }}</pre>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<ng-template #questionSet let-set let-prefix="prefix">
+  <mat-form-field appearance="outline">
+    <mat-label>Titolo sezione</mat-label>
+    <input matInput [(ngModel)]="set.title">
+  </mat-form-field>
+  <div *ngFor="let q of set.items; let i = index" class="question-editor">
+    <div class="q-head">
+      <mat-form-field appearance="outline" class="narrow">
+        <mat-label>ID</mat-label>
+        <input matInput [(ngModel)]="q.id">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="narrow">
+        <mat-label>Punti</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="q.points">
+      </mat-form-field>
+      <span class="spacer"></span>
+      <button mat-icon-button aria-label="Rimuovi" (click)="removeQuestion(set, i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Domanda</mat-label>
+      <input matInput [(ngModel)]="q.text">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Risposta</mat-label>
+      <textarea matInput rows="2" [(ngModel)]="q.answer"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Motivazione (opzionale)</mat-label>
+      <textarea matInput rows="2" [(ngModel)]="q.rationale"></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-stroked-button (click)="addQuestion(set, prefix)">
+    <mat-icon>add</mat-icon> Aggiungi domanda
+  </button>
+</ng-template>

@@ -1,0 +1,147 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    flex: 0 0 auto;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.creator {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 16px 24px;
+}
+
+.creator mat-expansion-panel + mat-expansion-panel {
+    margin-top: 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-form-field.narrow {
+    width: 140px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.grid > mat-form-field {
+    flex: 1 1 220px;
+}
+
+.grid > mat-form-field.grow {
+    flex: 2 1 320px;
+}
+
+.grid > mat-form-field.narrow {
+    flex: 0 0 140px;
+}
+
+.add-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.add-row mat-form-field.grow {
+    flex: 1 1 auto;
+}
+
+.place-editor,
+.step-editor,
+.question-editor {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.place-head,
+.step-head,
+.q-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.conditional-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.conditional {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.conditional-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.conditional-label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.add-letter {
+    width: 120px;
+}
+
+.gains {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.gains-label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.json-preview {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 12px;
+    border-radius: 4px;
+    max-height: 50vh;
+    overflow: auto;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}

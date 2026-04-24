@@ -95,6 +95,14 @@ Both routes go through `loadAdventure` which validates that `places` is an objec
 - `sherlockPath.steps[].at` is optional — a step without a `pointId` still renders but has no fly-to button. `gains` feed the chip row so players can see which clue letters Holmes would have gathered at each step; the app does **not** automatically add them to the session — that would spoil self-scoring.
 - Menu items "Domande" / "Percorso di Holmes" are hidden unless the loaded adventure declares the matching section (`adv.hasQuestions` / `adv.hasSherlockPath`).
 
+### Adventure authoring (`CreateAdventureComponent`)
+
+"Crea avventura..." in the main menu opens a fullscreen `MatDialog` (`panelClass: 'fullscreen-dialog'` — border-radius stripped via global override in `styles.scss`). The component holds a local `AdventureDraft` that mirrors the JSON shape but keeps `places` as an array (so the UI can iterate and reorder); `build()` transforms it back to the on-disk schema, pruning empty entries (a place with neither `default` nor a non-empty `conditional` is dropped; a question with empty `text` or `answer` is skipped).
+
+Point pickers (`mat-select`) are fed from `MapService.points`, so `place.id` and `sherlockPath.steps[*].at` can't typo. Clue-letter chips (for `conditional.requires` and `step.gains`) use the same normalisation as `SessionService.addClue` — uppercase, sorted — so authored conditions match how a player's clues will be compared at runtime.
+
+Four toolbar actions: **Modifica attuale** (only when `adventure.adventureSelected` — loads the currently active adventure back into the draft for editing), **Carica JSON** (file picker → `loadIntoDraft`), **Scarica** (blob-download the built JSON), **Usa come avventura** (applies via `AdventureService.loadAdventure` and closes). No confirmation dialogs on apply — there's no destructive state loss, you can always reopen the editor.
+
 ### Session tracking (localStorage-only)
 
 `SessionService` persists a single active "partita" under the localStorage key `shic.session`:

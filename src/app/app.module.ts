@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
@@ -33,6 +35,7 @@ import { SearchComponent } from './search/search.component';
 import { TaccuinoComponent } from './taccuino/taccuino.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
+import { CreateAdventureComponent } from './create-adventure/create-adventure.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
     TaccuinoComponent,
     QuestionsComponent,
     SherlockPathComponent,
+    CreateAdventureComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +74,8 @@ import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
     MatCheckboxModule,
     MatDividerModule,
     MatChipsModule,
+    MatSelectModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,7 @@ import { SearchComponent } from './search/search.component';
 import { TaccuinoComponent } from './taccuino/taccuino.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
+import { CreateAdventureComponent } from './create-adventure/create-adventure.component';
 import { SessionService } from './session.service';
 import { MapService, MapPoint } from './map.service';
 
@@ -235,6 +236,15 @@ export class AppComponent implements OnInit {
 
   openSherlockPath() {
     this.dialog.open(SherlockPathComponent);
+  }
+
+  openCreateAdventure() {
+    this.dialog.open(CreateAdventureComponent, {
+      panelClass: 'fullscreen-dialog',
+      width: '100vw',
+      maxWidth: '100vw',
+      height: '100vh',
+    });
   }
 
   get hasQuestions() {

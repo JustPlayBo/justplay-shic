@@ -81,7 +81,10 @@
     <mat-icon>close</mat-icon>
     <span>Rimuovi avventura</span>
   </button>
-  <a href="https://adventures.sherlock.justplaybo.it" target="_blank" rel="noopener" mat-menu-item>Crea Avventura...</a>
+  <button mat-menu-item (click)="openCreateAdventure()">
+    <mat-icon>create</mat-icon>
+    <span>Crea avventura...</span>
+  </button>
   <mat-divider></mat-divider>
   <button mat-menu-item (click)="newSession()">
     <mat-icon>play_arrow</mat-icon>
