@@ -71,6 +71,10 @@
     <mat-icon>play_arrow</mat-icon>
     <span>{{ session.isActive() ? 'Ricomincia partita' : 'Nuova partita' }}</span>
   </button>
+  <button mat-menu-item (click)="openTaccuino()">
+    <mat-icon>menu_book</mat-icon>
+    <span>Taccuino</span>
+  </button>
   <button mat-menu-item (click)="endSession()" *ngIf="session.isActive()">
     <mat-icon>stop</mat-icon>
     <span>Termina partita</span>

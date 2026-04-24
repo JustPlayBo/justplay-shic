@@ -44,9 +44,15 @@ Dialog data for hints is resolved through `AdventureService.getHint(place)`, whi
 
 ### Session tracking (localStorage-only)
 
-`SessionService` persists a single active "partita" under the localStorage key `shic.session`: `{startedAt, visited: Record<pointId, {at, note?}>}`. No backend. "Nuova partita" (app toolbar menu) calls `startNew()` which overwrites the previous session; there is no multi-session history. `SessionService.session$` is a `BehaviorSubject` — subscribing to it is how `AppComponent` re-styles the map circles when the player visits a new point or starts a new game.
+`SessionService` persists a single active "partita" under the localStorage key `shic.session`:
+`{startedAt, visited: Record<pointId, {at, note?}>, clues: Record<letter, {at, where?}>}`.
+No backend. "Nuova partita" (app toolbar menu) calls `startNew()` which overwrites the previous session; there is no multi-session history. `SessionService.session$` is a `BehaviorSubject` — subscribing to it is how `AppComponent` re-styles the map circles when the player visits a new point or starts a new game.
 
 `HintComponent` auto-calls `session.markVisited(id)` on open **only if a session is active**; otherwise the hint dialog behaves exactly as before. Map circles switch between `VISITED_STYLE` (filled brown-accent) and `UNVISITED_STYLE` (hollow orange) in `app.component.ts` — change the constants there, not in `pointToLayer`, or the style will drift between the initial render and the restyle-on-visit path.
+
+**Clues (BSI "circled letters")** are session-scoped flags, not location-scoped. `session.addClue(letter, where?)` normalises to uppercase + max 4 chars; `where` is the point id where the player recorded it (auto-filled when added from a hint dialog). The app only *tracks* clues — it does not branch hint content based on which clues are held; that would require a schema change to the adventure JSON served from `adventures.sherlock.justplaybo.it`.
+
+**Export/Import** (`session.exportJson()` / `importJson(raw)`) in `TaccuinoComponent`: export streams via `Blob` + `URL.createObjectURL` + synthetic anchor click; import goes through `FileReader` and a `confirm()` when overwriting an active session. `importJson` tolerates files missing a `clues` field (pre-clue exports) by defaulting to `{}`.
 
 ### MapService bridge
 

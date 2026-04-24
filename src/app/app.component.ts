@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { HintComponent } from './hint/hint.component';
 import { AdventuresComponent } from './adventures/adventures.component';
 import { SearchComponent } from './search/search.component';
+import { TaccuinoComponent } from './taccuino/taccuino.component';
 import { SessionService } from './session.service';
 import { MapService, MapPoint } from './map.service';
 
@@ -192,5 +193,9 @@ export class AppComponent implements OnInit {
 
   openSearch() {
     this.dialog.open(SearchComponent);
+  }
+
+  openTaccuino() {
+    this.dialog.open(TaccuinoComponent);
   }
 }

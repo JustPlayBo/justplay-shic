@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
@@ -29,6 +30,7 @@ import { SolutionComponent } from './solution/solution.component';
 import { MatListModule } from '@angular/material/list';
 import { IntroComponent } from './intro/intro.component';
 import { SearchComponent } from './search/search.component';
+import { TaccuinoComponent } from './taccuino/taccuino.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { SearchComponent } from './search/search.component';
     SolutionComponent,
     IntroComponent,
     SearchComponent,
+    TaccuinoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { SearchComponent } from './search/search.component';
     MatInputModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,7 @@ export class HintComponent implements OnInit {
 
   visited = false;
   note = '';
+  clueInput = '';
 
   constructor(
     public dialogRef: MatDialogRef<HintComponent>,
@@ -42,6 +43,22 @@ export class HintComponent implements OnInit {
   onNoteChange(note: string): void {
     this.note = note;
     if (this.visited) this.session.setNote(this.data.id, note);
+  }
+
+  addClue(): void {
+    const letter = this.clueInput.trim();
+    if (!letter) return;
+    this.session.addClue(letter, this.data.id);
+    this.clueInput = '';
+  }
+
+  removeClue(letter: string): void {
+    this.session.removeClue(letter);
+  }
+
+  clueLetters(): string[] {
+    const s = this.session.current;
+    return s ? Object.keys(s.clues).sort() : [];
   }
 
   onNoClick(): void {

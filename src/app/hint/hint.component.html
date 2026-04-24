@@ -25,6 +25,31 @@
                   (ngModelChange)="onNoteChange($event)"
                   placeholder="Osservazioni, collegamenti, sospetti…"></textarea>
       </mat-form-field>
+
+      <div class="clue-section">
+        <div class="clue-label">Indizi cerchiati</div>
+        <mat-chip-set>
+          <mat-chip *ngFor="let letter of clueLetters()"
+                    (removed)="removeClue(letter)">
+            {{ letter }}
+            <button matChipRemove aria-label="Rimuovi indizio">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-set>
+        <mat-form-field appearance="outline" class="clue-field">
+          <mat-label>Aggiungi indizio (es. S)</mat-label>
+          <input matInput maxlength="4"
+                 [(ngModel)]="clueInput"
+                 (keydown.enter)="addClue()">
+          <button matSuffix mat-icon-button
+                  aria-label="Aggiungi"
+                  [disabled]="!clueInput.trim()"
+                  (click)="addClue()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
     </div>
 </div>
 <div mat-dialog-actions align="end">

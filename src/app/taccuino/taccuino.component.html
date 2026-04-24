@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Taccuino</h2>
+<div mat-dialog-content class="taccuino">
+  <ng-container *ngIf="session.current as s; else noSession">
+    <div class="meta">
+      <span>Iniziata il {{ s.startedAt | date:'short' }}</span>
+      <span>·</span>
+      <span>{{ visitedRows().length }} luoghi · {{ clueRows().length }} indizi</span>
+    </div>
+
+    <div class="actions">
+      <button mat-stroked-button (click)="export()">
+        <mat-icon>download</mat-icon>
+        Esporta JSON
+      </button>
+      <button mat-stroked-button (click)="triggerImport()">
+        <mat-icon>upload</mat-icon>
+        Importa JSON
+      </button>
+      <input #fileInput type="file" accept="application/json"
+             (change)="onFileSelected($event)" hidden>
+    </div>
+
+    <section>
+      <h3>Luoghi visitati</h3>
+      <mat-action-list *ngIf="visitedRows().length > 0; else noVisited">
+        <button mat-list-item *ngFor="let row of visitedRows()" (click)="goTo(row)">
+          <mat-icon matListItemIcon>place</mat-icon>
+          <span matListItemTitle>{{ row.name || row.id }}</span>
+          <span matListItemLine>
+            {{ row.id }} · {{ row.at | date:'short' }}
+          </span>
+          <span matListItemLine *ngIf="row.note" class="note">{{ row.note }}</span>
+        </button>
+      </mat-action-list>
+      <ng-template #noVisited>
+        <p class="empty">Nessun luogo visitato.</p>
+      </ng-template>
+    </section>
+
+    <section>
+      <h3>Indizi cerchiati</h3>
+      <div *ngIf="clueRows().length > 0; else noClues" class="clue-list">
+        <div class="clue-row" *ngFor="let c of clueRows()">
+          <mat-chip class="clue-chip">{{ c.letter }}</mat-chip>
+          <span class="clue-where">
+            <ng-container *ngIf="c.where; else noWhere">
+              trovato in {{ c.whereName || c.where }}
+            </ng-container>
+            <ng-template #noWhere>senza luogo</ng-template>
+          </span>
+          <span class="clue-at">{{ c.at | date:'short' }}</span>
+        </div>
+      </div>
+      <ng-template #noClues>
+        <p class="empty">Nessun indizio raccolto.</p>
+      </ng-template>
+    </section>
+  </ng-container>
+
+  <ng-template #noSession>
+    <p class="empty">Nessuna partita attiva.</p>
+    <div class="actions">
+      <button mat-stroked-button (click)="triggerImport()">
+        <mat-icon>upload</mat-icon>
+        Importa JSON
+      </button>
+      <input #fileInput type="file" accept="application/json"
+             (change)="onFileSelected($event)" hidden>
+    </div>
+  </ng-template>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Chiudi</button>
+</div>

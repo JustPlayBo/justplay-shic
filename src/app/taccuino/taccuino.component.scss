@@ -1,0 +1,66 @@
+.taccuino {
+  min-width: min(520px, 92vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+section h3 {
+  margin: 4px 0 8px;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.empty {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin: 4px 0;
+}
+
+.note {
+  white-space: pre-wrap;
+  opacity: 0.85;
+}
+
+.clue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.clue-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.clue-chip {
+  min-width: 32px;
+  justify-content: center;
+}
+
+.clue-where {
+  flex: 1 1 auto;
+}
+
+.clue-at {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}

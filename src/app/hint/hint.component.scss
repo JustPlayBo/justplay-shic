@@ -9,6 +9,19 @@ a {
     gap: 8px;
 }
 
-.note-field {
+.note-field,
+.clue-field {
     width: 100%;
+}
+
+.clue-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.clue-label {
+    font-size: 0.85rem;
+    opacity: 0.75;
 }
