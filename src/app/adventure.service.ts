@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SessionService } from './session.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Narration {
   title?: string;
@@ -47,6 +48,7 @@ export interface SherlockPath {
 export interface Adventure {
   id?: string;
   title?: string;
+  author?: string;
   version?: number;
   intro?: Narration;
   solution?: Narration | string;
@@ -57,8 +59,6 @@ export interface Adventure {
   };
   sherlockPath?: SherlockPath;
 }
-
-const EMPTY_HINT = 'Non ci sono indizi in questo punto della mappa.';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +71,7 @@ export class AdventureService {
   constructor(
     private http: HttpClient,
     private session: SessionService,
+    private translate: TranslateService,
   ) { }
 
   getAdventures() {
@@ -92,7 +93,7 @@ export class AdventureService {
 
   loadAdventure(adv: Adventure): void {
     if (!adv || typeof adv !== 'object' || typeof adv.places !== 'object') {
-      throw new Error('Formato avventura non valido: manca "places".');
+      throw new Error(this.translate.instant('service.no_places'));
     }
     this.adventure = adv;
     this.selected = true;
@@ -133,8 +134,9 @@ export class AdventureService {
   }
 
   getHint(place: string): string {
+    const empty = this.translate.instant('service.empty_hint');
     const places = this.adventure?.places;
-    if (!places || !(place in places)) return EMPTY_HINT;
+    if (!places || !(place in places)) return empty;
 
     const entry = places[place];
     if (typeof entry === 'string') return entry;
@@ -147,7 +149,7 @@ export class AdventureService {
         parts.push(c.html);
       }
     }
-    return parts.length ? parts.join('\n') : EMPTY_HINT;
+    return parts.length ? parts.join('\n') : empty;
   }
 
   solveAdventure() {

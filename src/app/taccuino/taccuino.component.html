@@ -1,27 +1,27 @@
-<h2 mat-dialog-title>Taccuino</h2>
+<h2 mat-dialog-title>{{ 'taccuino.title' | translate }}</h2>
 <div mat-dialog-content class="taccuino">
   <ng-container *ngIf="session.current as s; else noSession">
     <div class="meta">
-      <span>Iniziata il {{ s.startedAt | date:'short' }}</span>
+      <span>{{ 'taccuino.started_at' | translate:{ date: (s.startedAt | date:'short') } }}</span>
       <span>·</span>
-      <span>{{ visitedRows().length }} luoghi · {{ clueRows().length }} indizi</span>
+      <span>{{ 'taccuino.counts' | translate:{ places: visitedRows().length, clues: clueRows().length } }}</span>
     </div>
 
     <div class="actions">
       <button mat-stroked-button (click)="export()">
         <mat-icon>download</mat-icon>
-        Esporta JSON
+        {{ 'taccuino.export' | translate }}
       </button>
       <button mat-stroked-button (click)="triggerImport()">
         <mat-icon>upload</mat-icon>
-        Importa JSON
+        {{ 'taccuino.import' | translate }}
       </button>
       <input #fileInput type="file" accept="application/json"
              (change)="onFileSelected($event)" hidden>
     </div>
 
     <section>
-      <h3>Luoghi visitati</h3>
+      <h3>{{ 'taccuino.visited_section' | translate }}</h3>
       <mat-action-list *ngIf="visitedRows().length > 0; else noVisited">
         <button mat-list-item *ngFor="let row of visitedRows()" (click)="goTo(row)">
           <mat-icon matListItemIcon>place</mat-icon>
@@ -33,36 +33,36 @@
         </button>
       </mat-action-list>
       <ng-template #noVisited>
-        <p class="empty">Nessun luogo visitato.</p>
+        <p class="empty">{{ 'taccuino.no_visited' | translate }}</p>
       </ng-template>
     </section>
 
     <section>
-      <h3>Indizi cerchiati</h3>
+      <h3>{{ 'taccuino.clues_section' | translate }}</h3>
       <div *ngIf="clueRows().length > 0; else noClues" class="clue-list">
         <div class="clue-row" *ngFor="let c of clueRows()">
           <mat-chip class="clue-chip">{{ c.letter }}</mat-chip>
           <span class="clue-where">
             <ng-container *ngIf="c.where; else noWhere">
-              trovato in {{ c.whereName || c.where }}
+              {{ 'taccuino.found_at' | translate:{ where: c.whereName || c.where } }}
             </ng-container>
-            <ng-template #noWhere>senza luogo</ng-template>
+            <ng-template #noWhere>{{ 'taccuino.no_where' | translate }}</ng-template>
           </span>
           <span class="clue-at">{{ c.at | date:'short' }}</span>
         </div>
       </div>
       <ng-template #noClues>
-        <p class="empty">Nessun indizio raccolto.</p>
+        <p class="empty">{{ 'taccuino.no_clues' | translate }}</p>
       </ng-template>
     </section>
   </ng-container>
 
   <ng-template #noSession>
-    <p class="empty">Nessuna partita attiva.</p>
+    <p class="empty">{{ 'taccuino.no_session' | translate }}</p>
     <div class="actions">
       <button mat-stroked-button (click)="triggerImport()">
         <mat-icon>upload</mat-icon>
-        Importa JSON
+        {{ 'taccuino.import' | translate }}
       </button>
       <input #fileInput type="file" accept="application/json"
              (change)="onFileSelected($event)" hidden>
@@ -70,5 +70,5 @@
   </ng-template>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
 </div>

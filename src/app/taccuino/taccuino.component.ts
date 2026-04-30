@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionService, VisitedEntry, ClueEntry } from '../session.service';
 import { MapService, MapPoint } from '../map.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface VisitedRow {
   id: string;
@@ -31,6 +32,7 @@ export class TaccuinoComponent {
     public session: SessionService,
     public mapService: MapService,
     public dialogRef: MatDialogRef<TaccuinoComponent>,
+    private translate: TranslateService,
   ) {}
 
   visitedRows(): VisitedRow[] {
@@ -93,7 +95,7 @@ export class TaccuinoComponent {
     input.value = '';
     if (!file) return;
     if (this.session.isActive() &&
-        !confirm('Importare sovrascriverà la partita corrente. Continuare?')) {
+        !confirm(this.translate.instant('taccuino.confirm_overwrite'))) {
       return;
     }
     const reader = new FileReader();
@@ -101,7 +103,8 @@ export class TaccuinoComponent {
       try {
         this.session.importJson(reader.result as string);
       } catch (err: any) {
-        alert('Importazione fallita: ' + (err?.message ?? 'file non valido.'));
+        const reason = err?.message ?? this.translate.instant('create.invalid_file');
+        alert(this.translate.instant('taccuino.import_failed', { reason }));
       }
     };
     reader.readAsText(file);

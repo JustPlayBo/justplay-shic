@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>{{ intro?.title || 'Introduzione' }}</h2>
+<h2 mat-dialog-title>{{ intro?.title || ('intro.default_title' | translate) }}</h2>
 <div mat-dialog-content class="narration">
   <div *ngIf="intro; else noIntro" [innerHtml]="intro.html"></div>
   <ng-template #noIntro>
-    <p class="empty">Nessuna avventura caricata.</p>
+    <p class="empty">{{ 'intro.empty' | translate }}</p>
   </ng-template>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
 </div>

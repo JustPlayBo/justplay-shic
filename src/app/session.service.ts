@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 const STORAGE_KEY = 'shic.session';
 
@@ -29,6 +30,8 @@ export interface Session {
 export class SessionService {
   private subject = new BehaviorSubject<Session | null>(this.load());
   readonly session$: Observable<Session | null> = this.subject.asObservable();
+
+  constructor(private translate: TranslateService) {}
 
   get current(): Session | null {
     return this.subject.value;
@@ -129,10 +132,10 @@ export class SessionService {
   importJson(raw: string): void {
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object') {
-      throw new Error('Il file non contiene una sessione valida.');
+      throw new Error(this.translate.instant('service.no_session_in_file'));
     }
     if (typeof parsed.startedAt !== 'string' || typeof parsed.visited !== 'object') {
-      throw new Error('Formato sessione non riconosciuto.');
+      throw new Error(this.translate.instant('service.unrecognized_format'));
     }
     const session: Session = {
       startedAt: parsed.startedAt,

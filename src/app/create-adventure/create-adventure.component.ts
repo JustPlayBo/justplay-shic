@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AdventureService, Adventure, ConditionalHint, Question, PathStep } from '../adventure.service';
 import { MapService, MapPoint } from '../map.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface PlaceDraft {
   id: string;
@@ -17,6 +18,7 @@ interface QuestionSetDraft {
 interface AdventureDraft {
   id: string;
   title: string;
+  author: string;
   version: number;
   intro: { title: string; html: string };
   solution: { title: string; html: string };
@@ -25,19 +27,20 @@ interface AdventureDraft {
   sherlockPath: { title: string; steps: PathStep[] };
 }
 
-function blankDraft(): AdventureDraft {
+function blankDraft(t: TranslateService): AdventureDraft {
   return {
     id: '',
     title: '',
+    author: '',
     version: 1,
     intro: { title: '', html: '' },
     solution: { title: '', html: '' },
     places: [],
     questions: {
-      primary: { title: 'Domande principali', items: [] },
-      secondary: { title: 'Domande accessorie', items: [] },
+      primary: { title: t.instant('default.primary_questions_title'), items: [] },
+      secondary: { title: t.instant('default.secondary_questions_title'), items: [] },
     },
-    sherlockPath: { title: 'Percorso di Sherlock Holmes', steps: [] },
+    sherlockPath: { title: t.instant('default.sherlock_path_title'), steps: [] },
   };
 }
 
@@ -50,14 +53,17 @@ function blankDraft(): AdventureDraft {
 export class CreateAdventureComponent {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
-  draft: AdventureDraft = blankDraft();
+  draft: AdventureDraft;
   addPointId = '';
 
   constructor(
     public mapService: MapService,
     public adventure: AdventureService,
     public dialogRef: MatDialogRef<CreateAdventureComponent>,
-  ) {}
+    private translate: TranslateService,
+  ) {
+    this.draft = blankDraft(translate);
+  }
 
   get availablePoints(): MapPoint[] {
     const used = new Set(this.draft.places.map(p => p.id));
@@ -136,6 +142,7 @@ export class CreateAdventureComponent {
     const adv: Adventure = {
       id: this.draft.id || undefined,
       title: this.draft.title || undefined,
+      author: this.draft.author.trim() || undefined,
       version: this.draft.version || 1,
       places: {},
     };
@@ -215,7 +222,8 @@ export class CreateAdventureComponent {
       this.adventure.loadAdventure(this.build());
       this.dialogRef.close();
     } catch (err: any) {
-      alert('Impossibile applicare l\'avventura: ' + (err?.message ?? 'formato non valido.'));
+      const reason = err?.message ?? this.translate.instant('create.invalid_format');
+      alert(this.translate.instant('create.apply_failed', { reason }));
     }
   }
 
@@ -234,7 +242,8 @@ export class CreateAdventureComponent {
         const parsed = JSON.parse(reader.result as string) as Adventure;
         this.loadIntoDraft(parsed);
       } catch (err: any) {
-        alert('Caricamento fallito: ' + (err?.message ?? 'file non valido.'));
+        const reason = err?.message ?? this.translate.instant('create.invalid_file');
+        alert(this.translate.instant('create.load_failed', { reason }));
       }
     };
     reader.readAsText(file);
@@ -246,9 +255,10 @@ export class CreateAdventureComponent {
   }
 
   private loadIntoDraft(adv: Adventure): void {
-    const d = blankDraft();
+    const d = blankDraft(this.translate);
     d.id = adv.id ?? '';
     d.title = adv.title ?? '';
+    d.author = adv.author ?? '';
     d.version = adv.version ?? 1;
     const intro: any = adv.intro;
     if (intro) {

@@ -1,21 +1,32 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-button (click)="lbar.toggle()" aria-label="Apri pannello Times">
+    <button mat-button (click)="lbar.toggle()" [attr.aria-label]="'app.open_times' | translate">
       <mat-icon class="example-icon" aria-hidden="true">menu</mat-icon>
       <span>Times</span>
     </button>
     <span class="example-spacer"></span>
-    <span class="title">Sherlock Holmes - Consulente Investigativo</span>
-    <button mat-icon-button (click)="gameInfo()" aria-label="Informazioni sul gioco">
+    <span class="title">{{ 'app.title' | translate }}</span>
+    <button mat-icon-button (click)="gameInfo()" [attr.aria-label]="'app.info_aria' | translate">
       <mat-icon>info</mat-icon>
     </button>
-    <button mat-icon-button (click)="openSearch()" aria-label="Cerca un luogo">
+    <button mat-icon-button (click)="openSearch()" [attr.aria-label]="'app.search_aria' | translate">
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-button [matMenuTriggerFor]="appMenu">Avventure</button>
+    <button mat-button [matMenuTriggerFor]="appMenu">{{ 'app.adventures_menu' | translate }}</button>
+
+    <button mat-icon-button [matMenuTriggerFor]="langMenu" [attr.aria-label]="'lang.label' | translate">
+      <mat-icon>translate</mat-icon>
+    </button>
+    <mat-menu #langMenu="matMenu">
+      <button mat-menu-item *ngFor="let l of supportedLangs" (click)="setLang(l)">
+        <mat-icon>{{ lang.current() === l ? 'check' : '' }}</mat-icon>
+        <span>{{ ('lang.' + (l === 'it' ? 'italian' : 'english')) | translate }}</span>
+      </button>
+    </mat-menu>
+
     <span class="example-spacer"></span>
-    <button mat-button (click)="rbar.toggle()" aria-label="Apri pannello Annuario">
+    <button mat-button (click)="rbar.toggle()" [attr.aria-label]="'app.open_annuario' | translate">
       <span>Annuario</span>
       <mat-icon class="example-icon" aria-hidden="true">menu</mat-icon>
     </button>
@@ -32,7 +43,7 @@
         <ng-template matExpansionPanelContent>
           <img *ngFor="let url of timed.pages; let i = index"
                [src]="url" width="215"
-               [alt]="'Pagina ' + (i + 1) + ' — ' + timed.title"
+               [alt]="'app.page_alt' | translate:{ n: i + 1, title: timed.title }"
                loading="lazy" decoding="async"
                (click)="show('The Times', url, 900)">
         </ng-template>
@@ -49,7 +60,7 @@
         <ng-template matExpansionPanelContent>
           <img *ngFor="let url of annu.pages; let i = index"
                [src]="url" width="240"
-               [alt]="'Pagina ' + (i + 1) + ' — ' + annu.title"
+               [alt]="'app.page_alt' | translate:{ n: i + 1, title: annu.title }"
                loading="lazy" decoding="async"
                (click)="show('Annuario', url, 800)">
         </ng-template>
@@ -62,44 +73,43 @@
 </mat-drawer-container>
 
 <mat-menu #appMenu="matMenu">
-  <button mat-menu-item (click)="chooseAdventure()">Scegli Avventura</button>
+  <button mat-menu-item (click)="chooseAdventure()">{{ 'app.menu.choose' | translate }}</button>
   <button mat-menu-item (click)="adventureFileInput.click()">
     <mat-icon>folder_open</mat-icon>
-    <span>Carica avventura (JSON)...</span>
+    <span>{{ 'app.menu.load_json' | translate }}</span>
   </button>
-  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="showIntro()">Rileggi introduzione</button>
-  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">Risolvi il caso</button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="showIntro()">{{ 'app.menu.reread_intro' | translate }}</button>
+  <button *ngIf="adv.adventureSelected" mat-menu-item (click)="solveAdventure()">{{ 'app.menu.solve' | translate }}</button>
   <button *ngIf="adv.adventureSelected && hasQuestions" mat-menu-item (click)="openQuestions()">
     <mat-icon>quiz</mat-icon>
-    <span>Domande</span>
+    <span>{{ 'app.menu.questions' | translate }}</span>
   </button>
   <button *ngIf="adv.adventureSelected && hasSherlockPath" mat-menu-item (click)="openSherlockPath()">
     <mat-icon>route</mat-icon>
-    <span>Percorso di Holmes</span>
+    <span>{{ 'app.menu.path' | translate }}</span>
   </button>
   <button *ngIf="adv.adventureSelected" mat-menu-item (click)="unloadAdventure()">
     <mat-icon>close</mat-icon>
-    <span>Rimuovi avventura</span>
+    <span>{{ 'app.menu.unload' | translate }}</span>
   </button>
   <button mat-menu-item (click)="openCreateAdventure()">
     <mat-icon>create</mat-icon>
-    <span>Crea avventura...</span>
+    <span>{{ 'app.menu.create' | translate }}</span>
   </button>
   <mat-divider></mat-divider>
   <button mat-menu-item (click)="newSession()">
     <mat-icon>play_arrow</mat-icon>
-    <span>{{ session.isActive() ? 'Ricomincia partita' : 'Nuova partita' }}</span>
+    <span>{{ (session.isActive() ? 'app.menu.restart_session' : 'app.menu.new_session') | translate }}</span>
   </button>
   <button mat-menu-item (click)="openTaccuino()">
     <mat-icon>menu_book</mat-icon>
-    <span>Taccuino</span>
+    <span>{{ 'app.menu.taccuino' | translate }}</span>
   </button>
   <button mat-menu-item (click)="endSession()" *ngIf="session.isActive()">
     <mat-icon>stop</mat-icon>
-    <span>Termina partita</span>
+    <span>{{ 'app.menu.end_session' | translate }}</span>
   </button>
 </mat-menu>
 
 <input #adventureFileInput type="file" accept="application/json"
        (change)="loadAdventureFromFile($event)" hidden>
-

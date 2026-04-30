@@ -1,19 +1,19 @@
-<h2 mat-dialog-title>Domande di fine caso</h2>
+<h2 mat-dialog-title>{{ 'questions.title' | translate }}</h2>
 <div mat-dialog-content class="questions">
   <div *ngIf="!session.isActive()" class="warning">
     <mat-icon>info</mat-icon>
-    Avvia una partita (Nuova partita) per registrare le tue risposte.
+    {{ 'questions.start_session_warning' | translate }}
   </div>
 
   <div *ngIf="sets.length === 0" class="empty">
-    Questa avventura non contiene domande.
+    {{ 'questions.empty' | translate }}
   </div>
 
   <section *ngFor="let set of sets">
     <header class="set-header">
       <h3>{{ set.title }}</h3>
       <span class="score">
-        {{ setScore(set) }} / {{ setMax(set) }} pt
+        {{ setScore(set) }} / {{ setMax(set) }} {{ 'questions.points_suffix' | translate }}
       </span>
     </header>
     <mat-accordion multi>
@@ -23,18 +23,18 @@
           <mat-panel-title class="q-title">
             <mat-icon *ngIf="isCorrect(q.id)" class="check">check_circle</mat-icon>
             <span class="q-text">{{ q.text }}</span>
-            <span class="q-points">+{{ q.points }} pt</span>
+            <span class="q-points">+{{ q.points }} {{ 'questions.points_suffix' | translate }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="answer"><strong>Risposta:</strong> {{ q.answer }}</div>
+        <div class="answer"><strong>{{ 'questions.answer_label' | translate }}</strong> {{ q.answer }}</div>
         <div class="rationale" *ngIf="q.rationale">{{ q.rationale }}</div>
         <div class="controls" *ngIf="session.isActive()">
           <mat-checkbox [checked]="isCorrect(q.id)"
                         (change)="toggle(q.id, $event.checked)">
-            Risposta esatta
+            {{ 'questions.correct' | translate }}
           </mat-checkbox>
           <button *ngIf="isAnswered(q.id)" mat-button (click)="clear(q.id)">
-            Annulla
+            {{ 'questions.cancel' | translate }}
           </button>
         </div>
       </mat-expansion-panel>
@@ -42,9 +42,9 @@
   </section>
 
   <footer *ngIf="sets.length > 0" class="total">
-    Totale: <strong>{{ totalScore() }}</strong> / {{ totalMax() }} pt
+    {{ 'questions.total' | translate }} <strong>{{ totalScore() }}</strong> / {{ totalMax() }} {{ 'questions.points_suffix' | translate }}
   </footer>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
 </div>

@@ -1,0 +1,184 @@
+{
+  "common": {
+    "ok": "OK",
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "add": "Aggiungi",
+    "delete": "Rimuovi",
+    "upload": "Carica",
+    "download": "Scarica"
+  },
+  "lang": {
+    "label": "Lingua",
+    "italian": "Italiano",
+    "english": "Inglese"
+  },
+  "app": {
+    "title": "Sherlock Holmes - Consulente Investigativo",
+    "open_times": "Apri pannello Times",
+    "open_annuario": "Apri pannello Annuario",
+    "info_aria": "Informazioni sul gioco",
+    "search_aria": "Cerca un luogo",
+    "adventures_menu": "Avventure",
+    "page_alt": "Pagina {{n}} — {{title}}",
+    "menu": {
+      "choose": "Scegli Avventura",
+      "load_json": "Carica avventura (JSON)...",
+      "reread_intro": "Rileggi introduzione",
+      "solve": "Risolvi il caso",
+      "questions": "Domande",
+      "path": "Percorso di Holmes",
+      "unload": "Rimuovi avventura",
+      "create": "Crea avventura...",
+      "new_session": "Nuova partita",
+      "restart_session": "Ricomincia partita",
+      "taccuino": "Taccuino",
+      "end_session": "Termina partita"
+    },
+    "confirm": {
+      "unload": "Scaricare l'avventura corrente?",
+      "new_session": "Iniziare una nuova partita cancellerà i luoghi visitati e gli appunti. Continuare?",
+      "end_session": "Chiudere la partita corrente e rimuovere tutti gli appunti?"
+    },
+    "errors": {
+      "load_failed": "Caricamento avventura fallito: {{reason}}",
+      "invalid_file": "file non valido.",
+      "network": "errore di rete."
+    }
+  },
+  "adventures": {
+    "title": "Scegli Avventura",
+    "empty": "Non ci sono avventure da giocare",
+    "by": "di"
+  },
+  "gameInfo": {
+    "title": "Sherlock Holmes Consulente Investigativo",
+    "body": "Sherlock Holmes Consulente Investigativo è un gioco collaborativo in cui, come membri della banda degli Irregolari di Baker Street, cercherete di risolvere dei casi misteriosi girando per le strade in cerca di indizi.",
+    "distributed_by": "Il gioco è distribuito da",
+    "contents": "Contenuti:",
+    "rules": "Il Regolamento"
+  },
+  "hint": {
+    "show": "Visualizza l'indizio",
+    "visited": "Visitato",
+    "notes": "Appunti",
+    "notes_placeholder": "Osservazioni, collegamenti, sospetti…",
+    "clues_circled": "Indizi cerchiati",
+    "remove_clue_aria": "Rimuovi indizio",
+    "add_clue_label": "Aggiungi indizio (es. S)",
+    "add_clue_aria": "Aggiungi"
+  },
+  "intro": {
+    "default_title": "Introduzione",
+    "empty": "Nessuna avventura caricata."
+  },
+  "solution": {
+    "default_title": "Soluzione",
+    "empty": "Nessuna soluzione disponibile."
+  },
+  "questions": {
+    "title": "Domande di fine caso",
+    "start_session_warning": "Avvia una partita (Nuova partita) per registrare le tue risposte.",
+    "empty": "Questa avventura non contiene domande.",
+    "points_suffix": "pt",
+    "answer_label": "Risposta:",
+    "correct": "Risposta esatta",
+    "cancel": "Annulla",
+    "total": "Totale:"
+  },
+  "search": {
+    "title": "Cerca luogo",
+    "label": "Nome o codice",
+    "clear_aria": "Pulisci",
+    "only_visited": "Solo visitati",
+    "empty": "Nessun risultato"
+  },
+  "sherlockPath": {
+    "default_title": "Il percorso di Sherlock Holmes",
+    "empty": "Questa avventura non include un percorso di riferimento.",
+    "go_to_aria": "Vai al luogo"
+  },
+  "taccuino": {
+    "title": "Taccuino",
+    "started_at": "Iniziata il {{date}}",
+    "counts": "{{places}} luoghi · {{clues}} indizi",
+    "export": "Esporta JSON",
+    "import": "Importa JSON",
+    "visited_section": "Luoghi visitati",
+    "no_visited": "Nessun luogo visitato.",
+    "clues_section": "Indizi cerchiati",
+    "found_at": "trovato in {{where}}",
+    "no_where": "senza luogo",
+    "no_clues": "Nessun indizio raccolto.",
+    "no_session": "Nessuna partita attiva.",
+    "confirm_overwrite": "Importare sovrascriverà la partita corrente. Continuare?",
+    "import_failed": "Importazione fallita: {{reason}}"
+  },
+  "create": {
+    "title": "Crea avventura",
+    "modify_current": "Modifica attuale",
+    "modify_current_tooltip": "Carica l'avventura attualmente selezionata",
+    "load_json": "Carica JSON",
+    "download": "Scarica",
+    "use": "Usa come avventura",
+    "close_aria": "Chiudi",
+    "metadata": "Metadati",
+    "untitled": "— senza titolo —",
+    "id_label": "ID (slug)",
+    "id_placeholder": "es. bsi-01",
+    "title_label": "Titolo",
+    "author_label": "Autore",
+    "version_label": "Versione",
+    "intro": "Introduzione",
+    "solution": "Soluzione",
+    "dialog_title_label": "Titolo dialog",
+    "html_label": "HTML",
+    "intro_html_placeholder": "<p>Londra, 1889…</p>",
+    "places": "Luoghi",
+    "places_count": "{{count}} configurati",
+    "add_place_label": "Aggiungi luogo",
+    "add_button": "Aggiungi",
+    "remove_place_aria": "Rimuovi luogo",
+    "default_clue": "Indizio generale (HTML)",
+    "if_circled": "Se ha cerchiato:",
+    "remove_aria": "Rimuovi",
+    "add_letter": "+ lettera",
+    "remove_condition_aria": "Rimuovi condizione",
+    "html_conditional": "HTML condizionale",
+    "add_conditional_branch": "Aggiungi ramo condizionale",
+    "questions_primary": "Domande principali",
+    "questions_secondary": "Domande accessorie",
+    "path_section": "Percorso di Holmes",
+    "steps_count": "{{count}} passi",
+    "section_title_label": "Titolo sezione",
+    "step_n": "Passo {{n}}",
+    "remove_step_aria": "Rimuovi passo",
+    "place_optional": "Luogo (opzionale)",
+    "no_place": "— nessuno —",
+    "description": "Descrizione",
+    "gains_obtained": "Indizi ottenuti:",
+    "add_step": "Aggiungi passo",
+    "json_preview": "Anteprima JSON",
+    "id_field": "ID",
+    "points_field": "Punti",
+    "question_field": "Domanda",
+    "answer_field": "Risposta",
+    "rationale_field": "Motivazione (opzionale)",
+    "add_question": "Aggiungi domanda",
+    "apply_failed": "Impossibile applicare l'avventura: {{reason}}",
+    "load_failed": "Caricamento fallito: {{reason}}",
+    "invalid_format": "formato non valido.",
+    "invalid_file": "file non valido."
+  },
+  "service": {
+    "no_places": "Formato avventura non valido: manca \"places\".",
+    "empty_hint": "Non ci sono indizi in questo punto della mappa.",
+    "no_session_in_file": "Il file non contiene una sessione valida.",
+    "unrecognized_format": "Formato sessione non riconosciuto."
+  },
+  "default": {
+    "primary_questions_title": "Domande principali",
+    "secondary_questions_title": "Domande accessorie",
+    "sherlock_path_title": "Percorso di Sherlock Holmes"
+  }
+}

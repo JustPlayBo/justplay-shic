@@ -16,6 +16,8 @@ import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
 import { CreateAdventureComponent } from './create-adventure/create-adventure.component';
 import { SessionService } from './session.service';
 import { MapService, MapPoint } from './map.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService, Lang, SUPPORTED_LANGS } from './language.service';
 
 declare const L;
 
@@ -66,14 +68,22 @@ export class AppComponent implements OnInit {
   interactions;
   points;
 
+  readonly supportedLangs = SUPPORTED_LANGS;
+
   constructor(
     private dialog: MatDialog,
     private http: HttpClient,
     public adv: AdventureService,
     public session: SessionService,
     private mapService: MapService,
+    private translate: TranslateService,
+    public lang: LanguageService,
   ) {
+    this.lang.init();
+  }
 
+  setLang(l: Lang): void {
+    this.lang.use(l);
   }
 
   ngOnInit() {
@@ -161,13 +171,18 @@ export class AppComponent implements OnInit {
           this.adv.loadAdventure(data);
           this.showIntro();
         } catch (err: any) {
-          alert('Caricamento avventura fallito: ' + (err?.message ?? 'file non valido.'));
+          this.alertLoadFailed(err, 'app.errors.invalid_file');
         }
       },
       error: err => {
-        alert('Caricamento avventura fallito: ' + (err?.message ?? 'errore di rete.'));
+        this.alertLoadFailed(err, 'app.errors.network');
       },
     });
+  }
+
+  private alertLoadFailed(err: any, fallbackKey: string): void {
+    const reason = err?.message ?? this.translate.instant(fallbackKey);
+    alert(this.translate.instant('app.errors.load_failed', { reason }));
   }
 
   private restylePoints(): void {
@@ -216,28 +231,28 @@ export class AppComponent implements OnInit {
         this.adv.loadAdventure(parsed);
         this.showIntro();
       } catch (err: any) {
-        alert('Caricamento avventura fallito: ' + (err?.message ?? 'file non valido.'));
+        this.alertLoadFailed(err, 'app.errors.invalid_file');
       }
     };
     reader.readAsText(file);
   }
 
   unloadAdventure(): void {
-    if (confirm('Scaricare l\'avventura corrente?')) {
+    if (confirm(this.translate.instant('app.confirm.unload'))) {
       this.adv.unloadAdventure();
     }
   }
 
   newSession() {
     if (this.session.isActive() &&
-        !confirm('Iniziare una nuova partita cancellerà i luoghi visitati e gli appunti. Continuare?')) {
+        !confirm(this.translate.instant('app.confirm.new_session'))) {
       return;
     }
     this.session.startNew();
   }
 
   endSession() {
-    if (confirm('Chiudere la partita corrente e rimuovere tutti gli appunti?')) {
+    if (confirm(this.translate.instant('app.confirm.end_session'))) {
       this.session.clear();
     }
   }

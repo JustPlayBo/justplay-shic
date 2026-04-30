@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>{{ path?.title || 'Il percorso di Sherlock Holmes' }}</h2>
+<h2 mat-dialog-title>{{ path?.title || ('sherlockPath.default_title' | translate) }}</h2>
 <div mat-dialog-content class="path-dialog">
-  <p *ngIf="!path" class="empty">Questa avventura non include un percorso di riferimento.</p>
+  <p *ngIf="!path" class="empty">{{ 'sherlockPath.empty' | translate }}</p>
 
   <ol *ngIf="path" class="steps">
     <li *ngFor="let step of path.steps" class="step">
@@ -8,7 +8,7 @@
         <span class="step-title">{{ step.title }}</span>
         <span *ngIf="step.at" class="step-code">{{ step.at }}</span>
         <button *ngIf="pointFor(step)" mat-icon-button
-                aria-label="Vai al luogo" (click)="goTo(step)">
+                [attr.aria-label]="'sherlockPath.go_to_aria' | translate" (click)="goTo(step)">
           <mat-icon>place</mat-icon>
         </button>
       </div>
@@ -20,5 +20,5 @@
   </ol>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
 </div>

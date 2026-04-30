@@ -8,42 +8,42 @@
     </div>
     <mat-expansion-panel *ngIf="adventure.adventureSelected">
       <mat-expansion-panel-header>
-        Visualizza l'indizio
+        {{ 'hint.show' | translate }}
       </mat-expansion-panel-header>
       <div [innerHtml]="getHint()"></div>
     </mat-expansion-panel>
 
     <div *ngIf="session.isActive()" class="tracker">
       <mat-checkbox [checked]="visited" (change)="onVisitedChange($event.checked)">
-        Visitato
+        {{ 'hint.visited' | translate }}
       </mat-checkbox>
       <mat-form-field appearance="outline" class="note-field">
-        <mat-label>Appunti</mat-label>
+        <mat-label>{{ 'hint.notes' | translate }}</mat-label>
         <textarea matInput rows="3"
                   [disabled]="!visited"
                   [ngModel]="note"
                   (ngModelChange)="onNoteChange($event)"
-                  placeholder="Osservazioni, collegamenti, sospetti…"></textarea>
+                  [placeholder]="'hint.notes_placeholder' | translate"></textarea>
       </mat-form-field>
 
       <div class="clue-section">
-        <div class="clue-label">Indizi cerchiati</div>
+        <div class="clue-label">{{ 'hint.clues_circled' | translate }}</div>
         <mat-chip-set>
           <mat-chip *ngFor="let letter of clueLetters()"
                     (removed)="removeClue(letter)">
             {{ letter }}
-            <button matChipRemove aria-label="Rimuovi indizio">
+            <button matChipRemove [attr.aria-label]="'hint.remove_clue_aria' | translate">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
         </mat-chip-set>
         <mat-form-field appearance="outline" class="clue-field">
-          <mat-label>Aggiungi indizio (es. S)</mat-label>
+          <mat-label>{{ 'hint.add_clue_label' | translate }}</mat-label>
           <input matInput maxlength="4"
                  [(ngModel)]="clueInput"
                  (keydown.enter)="addClue()">
           <button matSuffix mat-icon-button
-                  aria-label="Aggiungi"
+                  [attr.aria-label]="'hint.add_clue_aria' | translate"
                   [disabled]="!clueInput.trim()"
                   (click)="addClue()">
             <mat-icon>add</mat-icon>
@@ -53,5 +53,5 @@
     </div>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">OK</button>
+  <button mat-button (click)="onNoClick()">{{ 'common.ok' | translate }}</button>
 </div>

@@ -22,7 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { BdgComponent } from './bdg/bdg.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BdgMapComponent } from './bdg-map/bdg-map.component';
 import { HintComponent } from './hint/hint.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -36,6 +36,13 @@ import { TaccuinoComponent } from './taccuino/taccuino.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { SherlockPathComponent } from './sherlock-path/sherlock-path.component';
 import { CreateAdventureComponent } from './create-adventure/create-adventure.component';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -76,6 +83,14 @@ import { CreateAdventureComponent } from './create-adventure/create-adventure.co
     MatChipsModule,
     MatSelectModule,
     MatTooltipModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'it',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>{{ solution?.title || 'Soluzione' }}</h2>
+<h2 mat-dialog-title>{{ solution?.title || ('solution.default_title' | translate) }}</h2>
 <div mat-dialog-content class="narration">
   <div *ngIf="solution; else noSolution" [innerHtml]="solution.html"></div>
   <ng-template #noSolution>
-    <p class="empty">Nessuna soluzione disponibile.</p>
+    <p class="empty">{{ 'solution.empty' | translate }}</p>
   </ng-template>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-button mat-dialog-close>{{ 'common.close' | translate }}</button>
 </div>

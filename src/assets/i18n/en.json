@@ -1,0 +1,184 @@
+{
+  "common": {
+    "ok": "OK",
+    "close": "Close",
+    "cancel": "Cancel",
+    "add": "Add",
+    "delete": "Delete",
+    "upload": "Upload",
+    "download": "Download"
+  },
+  "lang": {
+    "label": "Language",
+    "italian": "Italian",
+    "english": "English"
+  },
+  "app": {
+    "title": "Sherlock Holmes - Consulting Detective",
+    "open_times": "Open Times panel",
+    "open_annuario": "Open Almanac panel",
+    "info_aria": "About the game",
+    "search_aria": "Search a location",
+    "adventures_menu": "Adventures",
+    "page_alt": "Page {{n}} — {{title}}",
+    "menu": {
+      "choose": "Choose adventure",
+      "load_json": "Load adventure (JSON)…",
+      "reread_intro": "Re-read introduction",
+      "solve": "Solve the case",
+      "questions": "Questions",
+      "path": "Holmes' path",
+      "unload": "Unload adventure",
+      "create": "Create adventure…",
+      "new_session": "New game",
+      "restart_session": "Restart game",
+      "taccuino": "Notebook",
+      "end_session": "End game"
+    },
+    "confirm": {
+      "unload": "Unload the current adventure?",
+      "new_session": "Starting a new game will erase visited locations and notes. Continue?",
+      "end_session": "Close the current game and remove all notes?"
+    },
+    "errors": {
+      "load_failed": "Adventure loading failed: {{reason}}",
+      "invalid_file": "invalid file.",
+      "network": "network error."
+    }
+  },
+  "adventures": {
+    "title": "Choose adventure",
+    "empty": "There are no adventures to play",
+    "by": "by"
+  },
+  "gameInfo": {
+    "title": "Sherlock Holmes Consulting Detective",
+    "body": "Sherlock Holmes Consulting Detective is a cooperative game in which, as members of the Baker Street Irregulars, you try to solve mysterious cases by walking the streets in search of clues.",
+    "distributed_by": "The game is distributed by",
+    "contents": "Contents:",
+    "rules": "The Rulebook"
+  },
+  "hint": {
+    "show": "Show clue",
+    "visited": "Visited",
+    "notes": "Notes",
+    "notes_placeholder": "Observations, connections, suspects…",
+    "clues_circled": "Circled clues",
+    "remove_clue_aria": "Remove clue",
+    "add_clue_label": "Add clue (e.g. S)",
+    "add_clue_aria": "Add"
+  },
+  "intro": {
+    "default_title": "Introduction",
+    "empty": "No adventure loaded."
+  },
+  "solution": {
+    "default_title": "Solution",
+    "empty": "No solution available."
+  },
+  "questions": {
+    "title": "End-of-case questions",
+    "start_session_warning": "Start a game (New game) to record your answers.",
+    "empty": "This adventure has no questions.",
+    "points_suffix": "pt",
+    "answer_label": "Answer:",
+    "correct": "Correct answer",
+    "cancel": "Clear",
+    "total": "Total:"
+  },
+  "search": {
+    "title": "Search location",
+    "label": "Name or code",
+    "clear_aria": "Clear",
+    "only_visited": "Only visited",
+    "empty": "No results"
+  },
+  "sherlockPath": {
+    "default_title": "Sherlock Holmes' path",
+    "empty": "This adventure does not include a reference path.",
+    "go_to_aria": "Go to location"
+  },
+  "taccuino": {
+    "title": "Notebook",
+    "started_at": "Started on {{date}}",
+    "counts": "{{places}} places · {{clues}} clues",
+    "export": "Export JSON",
+    "import": "Import JSON",
+    "visited_section": "Visited locations",
+    "no_visited": "No visited locations.",
+    "clues_section": "Circled clues",
+    "found_at": "found at {{where}}",
+    "no_where": "no location",
+    "no_clues": "No clues collected.",
+    "no_session": "No active game.",
+    "confirm_overwrite": "Importing will overwrite the current game. Continue?",
+    "import_failed": "Import failed: {{reason}}"
+  },
+  "create": {
+    "title": "Create adventure",
+    "modify_current": "Edit current",
+    "modify_current_tooltip": "Load the currently selected adventure",
+    "load_json": "Load JSON",
+    "download": "Download",
+    "use": "Use as adventure",
+    "close_aria": "Close",
+    "metadata": "Metadata",
+    "untitled": "— untitled —",
+    "id_label": "ID (slug)",
+    "id_placeholder": "e.g. bsi-01",
+    "title_label": "Title",
+    "author_label": "Author",
+    "version_label": "Version",
+    "intro": "Introduction",
+    "solution": "Solution",
+    "dialog_title_label": "Dialog title",
+    "html_label": "HTML",
+    "intro_html_placeholder": "<p>London, 1889…</p>",
+    "places": "Places",
+    "places_count": "{{count}} configured",
+    "add_place_label": "Add place",
+    "add_button": "Add",
+    "remove_place_aria": "Remove place",
+    "default_clue": "General clue (HTML)",
+    "if_circled": "If circled:",
+    "remove_aria": "Remove",
+    "add_letter": "+ letter",
+    "remove_condition_aria": "Remove condition",
+    "html_conditional": "Conditional HTML",
+    "add_conditional_branch": "Add conditional branch",
+    "questions_primary": "Primary questions",
+    "questions_secondary": "Secondary questions",
+    "path_section": "Holmes' path",
+    "steps_count": "{{count}} steps",
+    "section_title_label": "Section title",
+    "step_n": "Step {{n}}",
+    "remove_step_aria": "Remove step",
+    "place_optional": "Place (optional)",
+    "no_place": "— none —",
+    "description": "Description",
+    "gains_obtained": "Clues obtained:",
+    "add_step": "Add step",
+    "json_preview": "JSON preview",
+    "id_field": "ID",
+    "points_field": "Points",
+    "question_field": "Question",
+    "answer_field": "Answer",
+    "rationale_field": "Rationale (optional)",
+    "add_question": "Add question",
+    "apply_failed": "Cannot apply adventure: {{reason}}",
+    "load_failed": "Loading failed: {{reason}}",
+    "invalid_format": "invalid format.",
+    "invalid_file": "invalid file."
+  },
+  "service": {
+    "no_places": "Invalid adventure format: missing \"places\".",
+    "empty_hint": "There are no clues at this location.",
+    "no_session_in_file": "The file does not contain a valid session.",
+    "unrecognized_format": "Unrecognized session format."
+  },
+  "default": {
+    "primary_questions_title": "Primary questions",
+    "secondary_questions_title": "Secondary questions",
+    "sherlock_path_title": "Sherlock Holmes' path"
+  }
+}
