@@ -1,6 +1,6 @@
 import { IntroComponent } from './intro/intro.component';
 import { SolutionComponent } from './solution/solution.component';
-import { AdventureService } from './adventure.service';
+import { AdventureService, Adventure } from './adventure.service';
 import { BdgComponent } from './bdg/bdg.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
@@ -148,6 +148,26 @@ export class AppComponent implements OnInit {
     this.mapService.openHint = (props) => this.openHint(props);
 
     this.session.session$.subscribe(() => this.restylePoints());
+
+    this.loadAdventureFromUrlParam();
+  }
+
+  private loadAdventureFromUrlParam(): void {
+    const url = new URLSearchParams(window.location.search).get('adventure');
+    if (!url) return;
+    this.http.get<Adventure>(url).subscribe({
+      next: data => {
+        try {
+          this.adv.loadAdventure(data);
+          this.showIntro();
+        } catch (err: any) {
+          alert('Caricamento avventura fallito: ' + (err?.message ?? 'file non valido.'));
+        }
+      },
+      error: err => {
+        alert('Caricamento avventura fallito: ' + (err?.message ?? 'errore di rete.'));
+      },
+    });
   }
 
   private restylePoints(): void {
